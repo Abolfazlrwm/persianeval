@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-label="PersianEval banner">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#123a47"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2dd4bf"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+    <pattern id="stars" width="90" height="90" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <path d="M45 33 L52 45 L45 57 L38 45 Z M33 45 L45 38 L57 45 L45 52 Z"
+            fill="none" stroke="#2dd4bf" stroke-opacity="0.10" stroke-width="1.2"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="300" rx="16" fill="url(#bg)"/>
+  <rect width="1200" height="300" rx="16" fill="url(#stars)"/>
+  <rect x="1.5" y="1.5" width="1197" height="297" rx="15" fill="none" stroke="#2dd4bf" stroke-opacity="0.35" stroke-width="3"/>
+
+  <!-- eight-pointed star mark -->
+  <g transform="translate(150,150)">
+    <rect x="-46" y="-46" width="92" height="92" fill="none" stroke="url(#accent)" stroke-width="4"/>
+    <rect x="-46" y="-46" width="92" height="92" fill="none" stroke="url(#accent)" stroke-width="4" transform="rotate(45)"/>
+    <circle r="14" fill="url(#accent)"/>
+  </g>
+
+  <text x="260" y="128" font-family="'Segoe UI', 'Vazirmatn', Tahoma, sans-serif" font-size="72" font-weight="800" fill="#f1f5f9" letter-spacing="1">PersianEval</text>
+  <text x="262" y="176" font-family="Tahoma, 'Vazirmatn', sans-serif" font-size="30" fill="#2dd4bf">بنچمارک متن‌باز ارزیابی مدل‌های زبانی فارسی</text>
+
+  <text x="262" y="232" font-family="'Segoe UI', Tahoma, sans-serif" font-size="22" fill="#94a3b8">8 tasks · reproducible harness · weekly leaderboard · Apache-2.0</text>
+  <rect x="260" y="200" width="420" height="3" fill="url(#accent)" opacity="0.7"/>
+</svg>
