@@ -1,0 +1,43 @@
+name: New evaluation task
+description: پیشنهاد تسک ارزیابی جدید — Propose a new evaluation task or dataset
+labels: ["task", "enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        New tasks are the fastest way to grow PersianEval. Data must carry a
+        documented, permissive source. / هر تسک تازه باید منبع مستند و لایسنس آزاد داشته باشد.
+  - type: input
+    id: name
+    attributes:
+      label: Task name / skill measured
+      placeholder: "e.g. summarization_fa — خبری‌خلاصه‌سازی فارسی"
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Why does the benchmark need it?
+    validations:
+      required: true
+  - type: textarea
+    id: data
+    attributes:
+      label: Data source, license and size
+      placeholder: |
+        Source: authored / public domain / CC-BY ...
+        License: ...
+        Samples: >= 200 (>= 100 for LLM-judge tasks)
+    validations:
+      required: true
+  - type: dropdown
+    id: scoring
+    attributes:
+      label: Proposed scoring
+      options:
+        - exact
+        - fuzzy
+        - LLM-as-judge
+        - not sure yet
+    validations:
+      required: true

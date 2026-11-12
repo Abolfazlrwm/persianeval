@@ -1,0 +1,53 @@
+name: Bug report
+description: گزارش خطا — Report a problem with the harness, scoring or data
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Thank you for reporting — PersianEval improves through precise reports.
+        / برای گزارش دقیق شما سپاسگزاریم.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: چه اتفاقی افتاد؟ Commands, expected vs actual output.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        persianeval run --task reasoning --provider openai --model gpt-4o
+        ...
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - CLI
+        - harness (runner / cache / rate limit)
+        - providers (OpenAI / Anthropic / Ollama / vLLM)
+        - scorers (exact / fuzzy / judge)
+        - data (JSONL / checksums)
+        - leaderboard site
+        - CI / packaging
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: PersianEval version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: python
+    attributes:
+      label: Python version / OS
+      placeholder: "3.12.3 / Ubuntu 24.04"
+    validations:
+      required: true
