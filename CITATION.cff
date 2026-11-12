@@ -1,0 +1,29 @@
+# This file provides metadata for academic citation of PersianEval.
+# https://github.com/citation-file-format/citation-file-format
+cff-version: 1.2.0
+title: "PersianEval: An Open-Source Benchmark for Evaluating LLMs on Persian"
+message: >-
+  If you use PersianEval in your research, please cite it using this metadata.
+type: software
+authors:
+  - alias: "PersianEval Contributors"
+version: 0.1.0
+date-released: "2026-11-12"
+license: Apache-2.0
+repository-code: "https://github.com/Abolfazlrwm/persianeval"
+url: "https://Abolfazlrwm.github.io/persianeval/"
+keywords:
+  - natural language processing
+  - persian
+  - farsi
+  - large language models
+  - benchmark
+  - evaluation
+abstract: >-
+  PersianEval is the first serious open-source benchmark for evaluating
+  large language models on Persian (Farsi). It ships eight frozen,
+  checksummed evaluation tasks (reasoning, reading comprehension, spelling
+  and encoding, cultural knowledge, translation, RAG faithfulness, bias
+  detection, and code generation with Persian comments), a reproducible
+  async evaluation harness with caching and rate limiting, and a weekly
+  leaderboard published via GitHub Pages.
