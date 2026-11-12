@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PersianEval Leaderboard</title>
+<style>
+  :root {
+    --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --muted: #64748b;
+    --accent: #0ea5a4; --border: #e2e8f0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0b1220; --surface: #111a2c; --text: #e2e8f0; --muted: #94a3b8; --border: #1e293b; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font-family: Vazirmatn, "Segoe UI", Tahoma, sans-serif; line-height: 1.7; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+  header h1 { margin: 0 0 .3rem; font-size: 1.9rem; }
+  header h1 a { color: inherit; text-decoration: none; border-bottom: 3px solid var(--accent); }
+  header p { margin: 0 0 2rem; color: var(--muted); }
+  .banner { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 2rem; }
+  .banner svg { max-width: 480px; width: 100%; height: auto; }
+  .radar-box { background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+               padding: 1.25rem; color: var(--text); }
+  .radar-box h2 { margin: 0 0 .75rem; font-size: 1.05rem; }
+  .legend { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: .75rem; font-size: .85rem; color: var(--muted); }
+  .legend span::before { content: ""; display: inline-block; width: .8em; height: .8em; margin-inline-end: .35em;
+                         border-radius: 2px; background: var(--c); }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border);
+          border-radius: 14px; overflow: hidden; font-variant-numeric: tabular-nums; }
+  th, td { padding: .65rem .8rem; text-align: center; border-bottom: 1px solid var(--border); }
+  th { background: var(--surface); cursor: pointer; user-select: none; font-size: .85rem; color: var(--muted); }
+  th:hover { color: var(--accent); }
+  th .arrow { opacity: .5; }
+  td.model { text-align: right; direction: ltr; font-weight: 600; }
+  td .bar { display: block; height: 6px; border-radius: 3px; background: var(--accent); margin-top: .3rem; }
+  td.overall { font-weight: 800; color: var(--accent); }
+  tr:hover td { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+  .empty { background: var(--surface); border: 1px dashed var(--border); border-radius: 14px;
+           padding: 2.5rem 1.5rem; text-align: center; color: var(--muted); }
+  .tasks { margin-top: 2.5rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: .8rem; }
+  .task-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: .8rem 1rem; }
+  .task-card b { display: block; }
+  .task-card small { color: var(--muted); }
+  footer { margin-top: 3rem; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+  footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1><a href="https://github.com/Abolfazlrwm/persianeval">PersianEval</a></h1>
+    <p>بنچمارک متن‌باز ارزیابی مدل‌های زبانی فارسی — به‌روزرسانی هفتگی توسط GitHub Actions ·
+       Open-source benchmark for Persian LLMs — refreshed weekly by GitHub Actions</p>
+  </header>
+
+  
+  <div class="empty">
+    هنوز نتیجه‌ای ثبت نشده است. اولین اجرای هفتگی (<code>leaderboard.yml</code>) این جدول را پر می‌کند —
+    یا با <code>persianeval run</code> و سپس <code>persianeval leaderboard</code> خودت نتایج اضافه کن.<br>
+    No results yet. The first scheduled weekly run will populate this table — or run
+    <code>persianeval run</code> followed by <code>persianeval leaderboard</code> yourself.
+  </div>
+  
+
+  <div class="tasks">
+    
+    <div class="task-card">
+      <b>استدلال و حل مسئله</b>
+      <small>Reasoning (FA) · <code>reasoning</code> · حداقل 200 نمونه</small>
+    </div>
+    
+    <div class="task-card">
+      <b>درک مطلب</b>
+      <small>Reading Comprehension (FA) · <code>reading_comprehension</code> · حداقل 200 نمونه</small>
+    </div>
+    
+    <div class="task-card">
+      <b>املا و هم‌گردانی</b>
+      <small>Spelling &amp; Encoding (FA) · <code>spelling</code> · حداقل 200 نمونه</small>
+    </div>
+    
+    <div class="task-card">
+      <b>دانش فرهنگی ایران</b>
+      <small>Cultural Knowledge (IR) · <code>cultural_knowledge</code> · حداقل 200 نمونه</small>
+    </div>
+    
+    <div class="task-card">
+      <b>ترجمهٔ فارسی-انگلیسی</b>
+      <small>Translation FA&lt;-&gt;EN · <code>translation_fa_en</code> · حداقل 200 نمونه</small>
+    </div>
+    
+    <div class="task-card">
+      <b>وفاداری به متن (RAG)</b>
+      <small>RAG Faithfulness (FA) · <code>rag_faithfulness</code> · حداقل 200 نمونه</small>
+    </div>
+    
+    <div class="task-card">
+      <b>تشخیص تعصب</b>
+      <small>Bias Detection (FA) · <code>bias_detection</code> · حداقل 200 نمونه</small>
+    </div>
+    
+    <div class="task-card">
+      <b>کدنویسی با کامنت فارسی</b>
+      <small>Code with Persian Comments · <code>code_with_persian_comments</code> · حداقل 200 نمونه</small>
+    </div>
+    
+  </div>
+
+  <footer>
+    ساخته‌شده به‌صورت خودکار در <bdi>2026-11-12T12:38:14+00:00</bdi> · داده‌های خام:
+    <a href="data.json">data.json</a> · روش‌شناسی:
+    <a href="https://github.com/Abolfazlrwm/persianeval/blob/main/docs/methodology.md">methodology.md</a>
+    · Generated automatically on <bdi>2026-11-12T12:38:14+00:00</bdi>.
+  </footer>
+</div>
+<script>
+(function () {
+  "use strict";
+  var table = document.getElementById("board");
+  if (!table) { return; }
+  var tbody = table.tBodies[0];
+  var headers = table.querySelectorAll("th[data-key]");
+  headers.forEach(function (th) {
+    th.addEventListener("click", function () {
+      var rows = Array.prototype.slice.call(tbody.rows);
+      var index = th.cellIndex;
+      var ascending = th.dataset.dir !== "asc";
+      headers.forEach(function (other) {
+        other.dataset.dir = "";
+        var arrow = other.querySelector(".arrow");
+        if (arrow) { arrow.textContent = ""; }
+      });
+      th.dataset.dir = ascending ? "asc" : "desc";
+      var arrow = th.querySelector(".arrow");
+      if (arrow) { arrow.textContent = ascending ? "▲" : "▼"; }
+      rows.sort(function (a, b) {
+        var cellA = a.cells[index];
+        var cellB = b.cells[index];
+        var rawA = cellA.dataset.v !== undefined ? cellA.dataset.v : cellA.textContent.trim();
+        var rawB = cellB.dataset.v !== undefined ? cellB.dataset.v : cellB.textContent.trim();
+        var numA = parseFloat(rawA);
+        var numB = parseFloat(rawB);
+        if (!isNaN(numA) && !isNaN(numB)) {
+          return ascending ? numA - numB : numB - numA;
+        }
+        return ascending ? rawA.localeCompare(rawB, "fa") : rawB.localeCompare(rawA, "fa");
+      });
+      rows.forEach(function (row) { tbody.appendChild(row); });
+    });
+  });
+})();
+</script>
+</body>
+</html>
