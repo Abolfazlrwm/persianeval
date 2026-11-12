@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Tooling caches
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# PersianEval runtime artifacts (results are produced by runs / CI, never committed by hand)
+.persianeval_cache/
+results/*
+!results/README.md
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Do not ignore the leaderboard output: `leaderboard/` ships a fallback static page.

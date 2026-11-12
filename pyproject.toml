@@ -1,0 +1,121 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "persianeval"
+version = "0.1.0"
+description = "PersianEval: the first serious open-source benchmark for evaluating LLMs on Persian (Farsi) — 8 tasks, reproducible async harness, weekly leaderboard."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+keywords = [
+    "nlp",
+    "persian",
+    "farsi",
+    "llm",
+    "benchmark",
+    "evaluation",
+    "low-resource-languages",
+]
+authors = [{ name = "PersianEval Contributors" }]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Natural Language :: Persian",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+dependencies = [
+    "httpx>=0.27",
+    "pydantic>=2.7",
+    "typer>=0.12",
+    "jinja2>=3.1",
+    "pyarrow>=16.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.2",
+    "pytest-cov>=5.0",
+    "ruff>=0.5",
+    "mypy>=1.10",
+]
+
+[project.urls]
+Homepage = "https://github.com/Abolfazlrwm/persianeval"
+Repository = "https://github.com/Abolfazlrwm/persianeval"
+Issues = "https://github.com/Abolfazlrwm/persianeval/issues"
+Changelog = "https://github.com/Abolfazlrwm/persianeval/blob/main/CHANGELOG.md"
+Documentation = "https://github.com/Abolfazlrwm/persianeval/tree/main/docs"
+
+[project.scripts]
+persianeval = "persianeval.cli:main"
+
+[project.entry-points."persianeval.tasks"]
+# External packages may register additional tasks here, e.g.:
+# my_persian_task = "my_package.task:MyTask"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/persianeval"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "tests", "scripts", "docs", "README.md", "CHANGELOG.md", "LICENSE"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+src = ["src", "tests", "scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+# RUF001/002/003: Persian text throughout this project intentionally uses
+# Arabic-script characters that look like Latin glyphs.
+ignore = ["SIM108", "RUF001", "RUF002", "RUF003"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["persianeval"]
+
+[tool.ruff.lint.per-file-ignores]
+# Data-literal files: long single-line Persian passages/MCQs are the storage format.
+"scripts/generate_data/gen_rag.py" = ["E501"]
+"scripts/generate_data/gen_reading.py" = ["E501"]
+"scripts/generate_data/gen_cultural.py" = ["E501"]
+"scripts/generate_data/gen_translation.py" = ["E501"]
+"scripts/generate_data/gen_spelling.py" = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unreachable = true
+show_error_context = true
+pretty = true
+
+[[tool.mypy.overrides]]
+module = ["pyarrow.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.coverage.run]
+source = ["persianeval"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 80
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]

@@ -1,0 +1,5 @@
+# Mark generated / bulk files so GitHub keeps diffs readable
+*.jsonl -diff
+data/** linguist-documentation
+leaderboard/index.html linguist-generated
+docs/assets/*.svg linguist-generated
