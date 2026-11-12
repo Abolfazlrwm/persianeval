@@ -1,0 +1,144 @@
+name: Leaderboard
+
+# Weekly evaluation of open-source models through local Ollama runners,
+# publishing the static leaderboard to GitHub Pages.
+# See ADR 0003 (docs/adr/0003-leaderboard-freshness.md) for the sampling policy.
+
+on:
+  schedule:
+    - cron: "0 3 * * 1" # every Monday 03:00 UTC
+  workflow_dispatch:
+    inputs:
+      site_only:
+        description: "Skip model evaluation; publish the site from committed results"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: leaderboard
+  cancel-in-progress: false
+
+env:
+  # Models evaluated each week (kept small enough for GitHub-hosted runners).
+  MODELS: >-
+    [
+      {"name": "qwen2.5:7b-instruct", "org": "Qwen", "license": "Apache-2.0"},
+      {"name": "llama3.1:8b", "org": "Meta", "license": "Llama 3.1 Community"},
+      {"name": "gemma2:9b", "org": "Google", "license": "Gemma Terms"},
+      {"name": "aya-expanse:8b", "org": "Cohere For AI", "license": "CC-BY-NC"}
+    ]
+  # Seeded subsample per task: cheap weekly freshness (ADR 0003).
+  WEEKLY_LIMIT: "50"
+  RPM: "60"
+
+jobs:
+  evaluate:
+    name: Evaluate ${{ matrix.model }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    if: ${{ github.event_name == 'schedule' || !inputs.site_only }}
+    strategy:
+      fail-fast: false
+      matrix:
+        model: [qwen2.5:7b-instruct, llama3.1:8b, gemma2:9b, aya-expanse:8b]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install PersianEval
+        run: python -m pip install -e .
+
+      - name: Install and start Ollama
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          ollama serve &> /tmp/ollama.log &
+          sleep 5
+
+      - name: Pull model
+        run: ollama pull "${{ matrix.model }}"
+
+      - name: Resolve metadata for the model
+        id: meta
+        run: |
+          ORG=$(echo "$MODELS" | jq -r --arg m "${{ matrix.model }}" '.[] | select(.name == $m) | .org')
+          LIC=$(echo "$MODELS" | jq -r --arg m "${{ matrix.model }}" '.[] | select(.name == $m) | .license')
+          echo "org=$ORG" >> "$GITHUB_OUTPUT"
+          echo "license=$LIC" >> "$GITHUB_OUTPUT"
+
+      - name: Run all 8 tasks (seeded weekly subsample)
+        run: |
+          SEED="$(date -u +%G%V)"   # deterministic per ISO week (ADR 0003)
+          for TASK in reasoning reading_comprehension spelling cultural_knowledge \
+                      translation_fa_en rag_faithfulness bias_detection code_with_persian_comments; do
+            persianeval run \
+              --task "$TASK" \
+              --provider ollama \
+              --model "${{ matrix.model }}" \
+              --org "${{ steps.meta.outputs.org }}" \
+              --license "${{ steps.meta.outputs.license }}" \
+              --limit "$WEEKLY_LIMIT" \
+              --seed "$SEED" \
+              --max-requests-per-minute "$RPM" \
+              --concurrency 2 \
+              --max-tokens 1024 \
+              --out results
+          done
+
+      - name: Upload results artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: results-${{ matrix.model }}
+          path: results/*.json
+
+  publish:
+    name: Build and deploy leaderboard
+    needs: evaluate
+    if: ${{ !cancelled() && !failure() }}
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install PersianEval
+        run: python -m pip install -e .
+
+      - name: Download all result artifacts
+        if: ${{ github.event_name == 'schedule' || !inputs.site_only }}
+        uses: actions/download-artifact@v4
+        with:
+          pattern: results-*
+          merge-multiple: true
+          path: results
+
+      - name: Generate leaderboard site
+        run: persianeval leaderboard --results-dir results --out site
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
