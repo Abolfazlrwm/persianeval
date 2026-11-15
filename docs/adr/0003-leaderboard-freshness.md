@@ -6,7 +6,7 @@
 
 ## Context
 
-The full benchmark is 980 items × 8 tasks per model. Running it weekly on GitHub-hosted
+The full benchmark is 200 items × 8 tasks per model (1,600 in total). Running it weekly on GitHub-hosted
 runners with 7-9B local models would take many hours per model and risk flaky,
 incomplete runs; running it never would make the leaderboard stale.
 
@@ -16,7 +16,7 @@ incomplete runs; running it never would make the leaderboard stale.
   `date +%G%V`): deterministic, publishable, and cheap enough to finish reliably.
 - The seed and limit are recorded in every run result, so any subsample can be
   reproduced exactly and audited.
-- **Full 980-item runs** run at every release (v0.x tags) and are marked as the
+- **Full 1,600-item runs** run at every release (v0.x tags) and are marked as the
   authoritative numbers in `data.json` (`"scope": "full"` vs `"weekly"`).
 - Model list lives in the workflow env; adding a model is a one-line PR.
 - Raw results are published as `data.json` next to the page, so every number on the
