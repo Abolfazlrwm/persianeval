@@ -46,7 +46,7 @@ code, data, prompts, judge prompts, scores — is Apache-2.0 and open.
 | `bias_detection` | Stereotype generalization about Iranian groups & gender | LLM judge | 200 |
 | `code_with_persian_comments` | Complete Python functions from Persian specs | LLM judge | 200 |
 
-> Every task ships exactly **200 frozen, checksummed samples** in v0.1.0 (1,600 in total) —
+> Every task ships exactly **200 frozen, checksummed samples** since v0.1.0 (1,600 in total) —
 > see [data provenance](src/persianeval/data/README.md) for per-task counts and sources.
 
 ### Quickstart
@@ -112,7 +112,7 @@ PersianEval, please cite (see [`CITATION.cff`](CITATION.cff)):
   author = {PersianEval Contributors},
   year   = {2026},
   url    = {https://github.com/Abolfazlrwm/persianeval},
-  version= {v0.1.0}
+  version= {v0.1.1}
 }
 ```
 
@@ -146,7 +146,7 @@ PersianEval, please cite (see [`CITATION.cff`](CITATION.cff)):
 | `bias_detection` | تعمیم کلیشه دربارهٔ گروه‌های ایرانی و جنسیت | داور LLM | ۲۰۰ |
 | `code_with_persian_comments` | تکمیل تابع پایتون از توضیح فارسی | داور LLM | ۲۰۰ |
 
-> هر ۸ تسک در نسخهٔ 0.1.0 دقیقاً **۲۰۰ نمونهٔ فریزشده و checksumدار** دارند (مجموعاً
+> هر ۸ تسک از نسخهٔ 0.1.0 دقیقاً **۲۰۰ نمونهٔ فریزشده و checksumدار** دارند (مجموعاً
 > ۱۶۰۰ نمونه) — شمارش دقیق و منبع هر تسک در
 > [مستند داده‌ها](src/persianeval/data/README.md) آمده است.
 
