@@ -91,6 +91,23 @@ jobs:
           SEED="$(date -u +%G%V)"   # deterministic per ISO week (ADR 0003)
           for TASK in reasoning reading_comprehension spelling cultural_knowledge \
                       translation_fa_en rag_faithfulness bias_detection code_with_persian_comments; do
+            # 2026-11-16 postmortem: the Ollama server died mid-run under the
+            # memory pressure of concurrent CPU inference (all four matrix
+            # jobs failed with ProviderError after 6 attempts). Mitigation:
+            # serial in-flight requests, a tighter completion budget, and a
+            # liveness check with auto-restart before each task.
+            if ! curl -fsS http://127.0.0.1:11434/api/tags >/dev/null 2>&1; then
+              echo "ollama is not responding - restarting"
+              sudo systemctl restart ollama || true
+              for i in $(seq 1 30); do
+                if curl -fsS http://127.0.0.1:11434/api/tags; then
+                  echo "ollama is back (attempt $i)"
+                  break
+                fi
+                sleep 2
+              done
+              ollama pull "${{ matrix.model }}"  # no-op if cached; reloads weights
+            fi
             persianeval run \
               --task "$TASK" \
               --provider ollama \
@@ -100,8 +117,8 @@ jobs:
               --limit "$WEEKLY_LIMIT" \
               --seed "$SEED" \
               --max-requests-per-minute "$RPM" \
-              --concurrency 2 \
-              --max-tokens 1024 \
+              --concurrency 1 \
+              --max-tokens 512 \
               --request-timeout 600 \
               --out results
           done
