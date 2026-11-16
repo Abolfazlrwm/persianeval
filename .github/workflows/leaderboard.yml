@@ -61,8 +61,19 @@ jobs:
       - name: Install and start Ollama
         run: |
           curl -fsSL https://ollama.com/install.sh | sh
-          ollama serve &> /tmp/ollama.log &
-          sleep 5
+          # The install script already enables and starts the systemd
+          # service; an extra background `ollama serve` would fight it for
+          # port 11434. Poll readiness instead of a blind sleep.
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:11434/api/tags; then
+              echo "ollama is ready (attempt $i)"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "ollama did not become ready within 60s" >&2
+          tail -50 /tmp/ollama.log 2>/dev/null || true
+          exit 1
 
       - name: Pull model
         run: ollama pull "${{ matrix.model }}"
@@ -91,6 +102,7 @@ jobs:
               --max-requests-per-minute "$RPM" \
               --concurrency 2 \
               --max-tokens 1024 \
+              --request-timeout 600 \
               --out results
           done
 
