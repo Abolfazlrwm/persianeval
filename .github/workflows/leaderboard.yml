@@ -84,7 +84,17 @@ jobs:
           exit 1
 
       - name: Pull model
-        run: ollama pull "${{ matrix.model }}"
+        run: |
+          for ATTEMPT in 1 2 3; do
+            if ollama pull "${{ matrix.model }}"; then
+              echo "model pulled (attempt $ATTEMPT)"
+              exit 0
+            fi
+            echo "pull attempt $ATTEMPT failed - retrying in 30s"
+            sleep 30
+          done
+          echo "ollama pull failed after 3 attempts" >&2
+          exit 1
 
       - name: Resolve metadata for the model
         id: meta
