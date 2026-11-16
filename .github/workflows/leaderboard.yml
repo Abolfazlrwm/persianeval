@@ -116,21 +116,55 @@ jobs:
               done
               ollama pull "${{ matrix.model }}"  # no-op if cached; reloads weights
             fi
-            persianeval run \
-              --task "$TASK" \
-              --provider ollama \
-              --model "${{ matrix.model }}" \
-              --org "${{ steps.meta.outputs.org }}" \
-              --license "${{ steps.meta.outputs.license }}" \
-              --limit "$WEEKLY_LIMIT" \
-              --seed "$SEED" \
-              --max-requests-per-minute "$RPM" \
-              --concurrency 1 \
-              --max-tokens 512 \
-              --request-timeout 600 \
-              --out results
+            # The ollama process can still die mid-task (qwen2.5 7B died
+            # ~10 minutes into serial inference on 2026-11-16). Retry each
+            # task up to three times; restarting ollama resets whatever
+            # memory state accumulated, and a task rerun is deterministic
+            # (fixed seed) so a partial attempt is simply overwritten.
+            for ATTEMPT in 1 2 3; do
+              if persianeval run \
+                  --task "$TASK" \
+                  --provider ollama \
+                  --model "${{ matrix.model }}" \
+                  --org "${{ steps.meta.outputs.org }}" \
+                  --license "${{ steps.meta.outputs.license }}" \
+                  --limit "$WEEKLY_LIMIT" \
+                  --seed "$SEED" \
+                  --max-requests-per-minute "$RPM" \
+                  --concurrency 1 \
+                  --max-tokens 512 \
+                  --request-timeout 600 \
+                  --out results; then
+                echo "task $TASK done (attempt $ATTEMPT)"
+                break
+              fi
+              echo "task $TASK attempt $ATTEMPT failed - restarting ollama"
+              sudo systemctl restart ollama 2>/dev/null || true
+              pkill -f 'ollama serve' 2>/dev/null || true
+              sleep 5
+              nohup ollama serve >> /tmp/ollama.log 2>&1 &
+              for i in $(seq 1 30); do
+                if curl -fsS http://127.0.0.1:11434/api/tags; then
+                  echo "ollama is back (poll $i)"
+                  break
+                fi
+                sleep 2
+              done
+              ollama pull "${{ matrix.model }}"  # no-op if cached
+            done
           done
 
+      - name: Dump crash evidence on failure
+        if: failure()
+        run: |
+          echo "=== ollama log tail ==="
+          tail -80 /tmp/ollama.log 2>/dev/null || echo "(no ollama log)"
+          echo "=== oom / kill evidence (dmesg) ==="
+          (sudo dmesg 2>/dev/null || dmesg 2>/dev/null || true) | grep -iE "oom|kill|ollama" | tail -30 || echo "(no dmesg access)"
+          echo "=== memory snapshot ==="
+          free -h || true
+          echo "=== results written so far ==="
+          ls -la results/ 2>/dev/null || true
       - name: Upload results artifact
         uses: actions/upload-artifact@v4
         with:
