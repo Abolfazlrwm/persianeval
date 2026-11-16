@@ -60,18 +60,26 @@ jobs:
 
       - name: Install and start Ollama
         run: |
-          curl -fsSL https://ollama.com/install.sh | sh
-          # The install script already enables and starts the systemd
-          # service; an extra background `ollama serve` would fight it for
-          # port 11434. Poll readiness instead of a blind sleep.
-          for i in $(seq 1 30); do
-            if curl -fsS http://127.0.0.1:11434/api/tags; then
-              echo "ollama is ready (attempt $i)"
-              exit 0
-            fi
-            sleep 2
+          # The systemd service started by the install script is flaky on
+          # hosted runners (gemma2:9b job on 2026-11-16 never saw port
+          # 11434 come up). Stop systemd, run `ollama serve` directly and
+          # retry the whole sequence up to three times.
+          for ATTEMPT in 1 2 3; do
+            echo "ollama install attempt $ATTEMPT"
+            curl -fsSL https://ollama.com/install.sh | sh
+            sudo systemctl stop ollama 2>/dev/null || true
+            sudo systemctl disable ollama 2>/dev/null || true
+            nohup ollama serve > /tmp/ollama.log 2>&1 &
+            for i in $(seq 1 30); do
+              if curl -fsS http://127.0.0.1:11434/api/tags; then
+                echo "ollama is ready (attempt $ATTEMPT, poll $i)"
+                exit 0
+              fi
+              sleep 2
+            done
+            echo "attempt $ATTEMPT: ollama did not become ready within 60s"
           done
-          echo "ollama did not become ready within 60s" >&2
+          echo "ollama failed to start after 3 attempts" >&2
           tail -50 /tmp/ollama.log 2>/dev/null || true
           exit 1
 
