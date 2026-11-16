@@ -71,6 +71,14 @@ def run(
     ] = None,
     max_tokens: Annotated[int, typer.Option(help="Completion budget per item.")] = 1024,
     concurrency: Annotated[int, typer.Option(help="Maximum in-flight API requests.")] = 4,
+    request_timeout: Annotated[
+        float,
+        typer.Option(
+            "--request-timeout",
+            help="Per-request HTTP timeout in seconds. CPU-served local models (Ollama on a "
+            "runner without a GPU) routinely need more than the 120s default.",
+        ),
+    ] = 120.0,
     seed: Annotated[int, typer.Option(help="RNG seed for subset selection.")] = 42,
     temperature: Annotated[float, typer.Option(help="Sampling temperature (default 0.0).")] = 0.0,
     out_dir: Annotated[Path, typer.Option("--out", help="Directory for result files.")] = Path("results"),
@@ -81,7 +89,9 @@ def run(
     logging.basicConfig(level=logging.INFO, format=_LOGGING_FORMAT)
     try:
         task_obj = get_task(task)
-        provider_obj = create_provider(provider, model, base_url=base_url, rpm=max_requests_per_minute)
+        provider_obj = create_provider(
+            provider, model, base_url=base_url, rpm=max_requests_per_minute, timeout_s=request_timeout
+        )
     except (KeyError, ProviderError, ValueError) as exc:
         typer.secho(f"error: {exc}", fg=typer.colors.RED, err=True)
         raise typer.Exit(code=2) from exc
