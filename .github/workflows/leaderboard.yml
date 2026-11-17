@@ -33,7 +33,11 @@ env:
       {"name": "aya-expanse:8b", "org": "Cohere For AI", "license": "CC-BY-NC"}
     ]
   # Seeded subsample per task: cheap weekly freshness (ADR 0003).
-  WEEKLY_LIMIT: "50"
+  # Amended 2026-11-17: 50 -> 20 items. The 2026-11-16/17 postmortem showed
+  # 7-9B CPU inference at ~45 s/item cannot finish 8 tasks x 50 items inside
+  # the 350-minute job budget (gemma2:9b and aya-expanse:8b were killed
+  # mid-run); 20 items keeps the full weekly matrix inside the window.
+  WEEKLY_LIMIT: "20"
   RPM: "60"
 
 jobs:
@@ -85,15 +89,24 @@ jobs:
 
       - name: Pull model
         run: |
-          for ATTEMPT in 1 2 3; do
+          # 2026-11-17 postmortem: three fast pull failures in 66 s (llama3.1:8b
+          # job) — a hard registry hiccup defeats a fixed 30 s retry window.
+          # Five attempts with growing backoff cover multi-minute outages.
+          for ATTEMPT in 1 2 3 4 5; do
             if ollama pull "${{ matrix.model }}"; then
               echo "model pulled (attempt $ATTEMPT)"
               exit 0
             fi
-            echo "pull attempt $ATTEMPT failed - retrying in 30s"
-            sleep 30
+            case "$ATTEMPT" in
+              1) SLEEP=30 ;;
+              2) SLEEP=60 ;;
+              3) SLEEP=90 ;;
+              4) SLEEP=120 ;;
+            esac
+            echo "pull attempt $ATTEMPT failed - retrying in ${SLEEP}s"
+            sleep "$SLEEP"
           done
-          echo "ollama pull failed after 3 attempts" >&2
+          echo "ollama pull failed after 5 attempts" >&2
           exit 1
 
       - name: Resolve metadata for the model
@@ -131,6 +144,11 @@ jobs:
             # task up to three times; restarting ollama resets whatever
             # memory state accumulated, and a task rerun is deterministic
             # (fixed seed) so a partial attempt is simply overwritten.
+            # 2026-11-17 postmortem: when all three attempts failed, the loop
+            # fell through and the step still exited 0 (the last `ollama pull`
+            # set the exit code), so broken runs looked green. Track success
+            # explicitly and fail the step honestly.
+            TASK_OK=0
             for ATTEMPT in 1 2 3; do
               if persianeval run \
                   --task "$TASK" \
@@ -146,6 +164,7 @@ jobs:
                   --request-timeout 600 \
                   --out results; then
                 echo "task $TASK done (attempt $ATTEMPT)"
+                TASK_OK=1
                 break
               fi
               echo "task $TASK attempt $ATTEMPT failed - restarting ollama"
@@ -162,6 +181,10 @@ jobs:
               done
               ollama pull "${{ matrix.model }}"  # no-op if cached
             done
+            if [ "$TASK_OK" -ne 1 ]; then
+              echo "task $TASK failed after 3 attempts" >&2
+              exit 1
+            fi
           done
 
       - name: Dump crash evidence on failure
@@ -175,16 +198,26 @@ jobs:
           free -h || true
           echo "=== results written so far ==="
           ls -la results/ 2>/dev/null || true
+      - name: Compute artifact-safe slug
+        id: slug
+        run: echo "slug=$(echo "${{ matrix.model }}" | tr ':' '-')" >> "$GITHUB_OUTPUT"
+
+      # 2026-11-17 postmortem: artifact names inherit the matrix model string,
+      # and upload-artifact rejects `:` (results-qwen2.5:7b-instruct) — every
+      # finished run failed at upload. Sanitize the name via the slug above.
       - name: Upload results artifact
         uses: actions/upload-artifact@v4
         with:
-          name: results-${{ matrix.model }}
+          name: results-${{ steps.slug.outputs.slug }}
           path: results/*.json
+          if-no-files-found: error
 
   publish:
     name: Build and deploy leaderboard
     needs: evaluate
-    if: ${{ !cancelled() && !failure() }}
+    # 2026-11-17: publish whatever the matrix produced instead of skipping on
+    # any single-model failure — a partially fresh leaderboard beats a stale one.
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -208,9 +241,12 @@ jobs:
           pattern: results-*
           merge-multiple: true
           path: results
+        continue-on-error: true  # fall back to committed results when none exist
 
       - name: Generate leaderboard site
-        run: persianeval leaderboard --results-dir results --out site
+        run: |
+          mkdir -p results
+          persianeval leaderboard --results-dir results --out site
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
