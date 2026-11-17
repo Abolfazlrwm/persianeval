@@ -100,9 +100,20 @@ def run(
         f"task={task_obj.name} provider={provider_obj.provider_name} model={model} "
         f"seed={seed} temperature={temperature} concurrency={concurrency}"
     )
-    try:
-        result = asyncio.run(
-            run_task(
+
+    async def _run_and_close():
+        """Run the task and close the provider inside the same event loop.
+
+        httpx/anyio async primitives are bound to the event loop that created
+        them; closing the client from a second ``asyncio.run`` loop raised
+        ``RuntimeError: Event loop is closed`` after a successful run, which
+        made the CLI exit non-zero *before* ``save_json`` and silently
+        discarded the finished run's results (leaderboard postmortem
+        2026-11-17: every judge-scored task lost its results on all 3 retry
+        attempts because judge calls are never cache hits).
+        """
+        try:
+            return await run_task(
                 task_obj,
                 provider_obj,
                 limit=limit,
@@ -115,9 +126,10 @@ def run(
                 org=org,
                 license_id=license_id,
             )
-        )
-    finally:
-        asyncio.run(provider_obj.aclose())
+        finally:
+            await provider_obj.aclose()
+
+    result = asyncio.run(_run_and_close())
 
     slug = f"{result.task}__{model}".replace("/", "-")
     json_path = save_json(result, out_dir / f"{slug}.json")
