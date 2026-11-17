@@ -131,7 +131,7 @@ def run(
 
     result = asyncio.run(_run_and_close())
 
-    slug = f"{result.task}__{model}".replace("/", "-")
+    slug = f"{result.task}__{model}".replace("/", "-").replace(":", "-")
     json_path = save_json(result, out_dir / f"{slug}.json")
     parquet_path = save_parquet(result, out_dir / f"{slug}.parquet")
 
