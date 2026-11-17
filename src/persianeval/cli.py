@@ -18,7 +18,7 @@ from typing import Annotated, Final
 import typer
 
 from persianeval.harness.providers import ProviderError, create_provider
-from persianeval.harness.results import save_json, save_parquet
+from persianeval.harness.results import RunResult, save_json, save_parquet
 from persianeval.harness.runner import run_task
 from persianeval.leaderboard.generate import generate_site
 from persianeval.tasks import get_task
@@ -101,7 +101,7 @@ def run(
         f"seed={seed} temperature={temperature} concurrency={concurrency}"
     )
 
-    async def _run_and_close():
+    async def _run_and_close() -> RunResult:
         """Run the task and close the provider inside the same event loop.
 
         httpx/anyio async primitives are bound to the event loop that created
