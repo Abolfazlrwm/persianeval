@@ -1,6 +1,6 @@
 # ADR 0003: Leaderboard Freshness — Weekly seeded subsample
 
-- **Status:** Accepted · **Date:** 2026-11-12
+- **Status:** Accepted (amended 2026-11-17) · **Date:** 2026-11-12
 
 <div dir="ltr">
 
@@ -12,8 +12,14 @@ incomplete runs; running it never would make the leaderboard stale.
 
 ## Decision
 
-- The weekly action evaluates a **seeded 50-item subsample per task** (seed = ISO week,
+- The weekly action evaluates a **seeded subsample per task** (seed = ISO week,
   `date +%G%V`): deterministic, publishable, and cheap enough to finish reliably.
+- **Amended 2026-11-17:** the subsample is **20 items per task** (down from 50).
+  The 2026-11-16/17 leaderboard postmortem showed 7-9B CPU inference at roughly
+  45 s/item cannot finish 8 tasks × 50 items inside the 350-minute job budget —
+  gemma2:9b and aya-expanse:8b were killed mid-run. 20 items keeps the full
+  weekly matrix inside the window; the seed and recorded limit still make every
+  subsample exactly reproducible.
 - The seed and limit are recorded in every run result, so any subsample can be
   reproduced exactly and audited.
 - **Full 1,600-item runs** run at every release (v0.x tags) and are marked as the
@@ -22,10 +28,13 @@ incomplete runs; running it never would make the leaderboard stale.
 - Raw results are published as `data.json` next to the page, so every number on the
   leaderboard is one click away from its source.
 
+- On partial matrix failure the site is still published from whichever result
+  artifacts succeeded (a partially fresh leaderboard beats a stale one).
+
 ## Consequences
 
 - Weekly numbers have wider confidence intervals than full runs; the site labels them.
-- CI cost stays bounded (~1 hour per model per week on a public runner).
+- CI cost stays bounded (~2 hours per model per week on a public runner, CPU inference).
 
 </div>
 
@@ -36,13 +45,15 @@ incomplete runs; running it never would make the leaderboard stale.
 **زمینه:** بنچمارک کامل ۹۸۰ نمونه در ۸ تسک است؛ اجرای هفتگی کامل با مدل‌های محلی ۷-۹ میلیارد
 پارامتری روی رانرهای GitHub چند ساعت طول می‌کشد و شکننده است؛ عدم اجرا هم لیدربورد را کهنه می‌کند.
 
-**تصمیم:** اکشن هفتگی زیرنمونهٔ seedدار ۵۰تایی از هر تسک را می‌سنجد (seed = هفتهٔ ISO)؛ قطعی،
-قابل انتشار و ارزان. seed و limit در نتایج ثبت می‌شود تا هر زیرنمونه دقیقاً بازتولید و ممیزی
-شود. اجرای کامل ۹۸۰تایی در هر ریلیز انجام و اعداد آن به‌عنوان مرجع در `data.json` علامت‌گذاری
-می‌شود. فهرست مدل‌ها در env ورک‌فلو است و افزودن مدل یک خط PR است. نتایج خام کنار صفحه منتشر
-می‌شود تا هر عدد لیدربورد یک کلیک با منبعش فاصله داشته باشد.
+**تصمیم:** اکشن هفتگی زیرنمونهٔ seedدار از هر تسک را می‌سنجد (seed = هفتهٔ ISO)؛ قطعی،
+قابل انتشار و ارزان. **اصلاح ۱۴۰۵/۰۸/۲۶ (۲۰۲۶-۱۱-۱۷):** حجم زیرنمونه از ۵۰ به **۲۰ قلم در هر تسک**
+کاهش یافت — بررسی رخداد ۲۰۲۶-۱۱-۱۶/۱۷ نشان داد استنتاج CPU مدل‌های ۷ تا ۹ میلیاردی با حدود ۴۵
+ثانیه به‌ازای هر قلم، ۸ تسک × ۵۰ قلم را در بودجهٔ ۳۵۰ دقیقه‌ای جابجا نمی‌کند و gemma2:9b و
+aya-expanse:8b وسط کار کشته می‌شدند. با ۲۰ قلم کل ماتریس هفتگی در پنجره جا می‌شود؛ seed و
+limit ثبت‌شده در نتایج همچنان بازتولید دقیق هر زیرنمونه را تضمین می‌کند. در شکست جزئی ماتریس،
+سایت از آرتیفکت‌های موفق منتشر می‌شود (لیدربورد نیمه‌تازه بهتر از لیدربورد کهنه است).
 
 **پیامد:** اعداد هفتگی بازهٔ اطمینان بزرگ‌تری دارند و سایت این را برچسب می‌زند؛ هزینهٔ CI محدود
-می‌ماند (حدود یک ساعت به‌ازای هر مدل در هفته).
+می‌ماند (حدود ۲ ساعت به‌ازای هر مدل در هفته روی رانر CPU).
 
 </div>
