@@ -30,7 +30,7 @@ translated datasets are often machine-translated and leaked into training data, 
 challenges that are uniquely Persian — Arabic/Persian homoglyphs (ي/ی، ك/ک), half-space
 rules (نیم‌فاصله), the cultural commons of Iran — are invisible to most benchmarks.
 **PersianEval** fills that gap with 8 frozen, checksummed tasks, a reproducible async
-evaluation harness, and a weekly-updated leaderboard that anyone can audit. Everything —
+evaluation harness, and an auditable leaderboard pipeline. Everything —
 code, data, prompts, judge prompts, scores — is Apache-2.0 and open.
 
 ### Tasks (8)
@@ -80,14 +80,21 @@ both **JSON** and **Parquet**.
 
 ### Leaderboard
 
-The [leaderboard](https://Abolfazlrwm.github.io/persianeval/) is a dependency-free static
-page (sortable table + radar chart) regenerated every Monday by
-[`.github/workflows/leaderboard.yml`](.github/workflows/leaderboard.yml), which evaluates
-a rotating seeded sample of open-source models (Qwen 2.5, Llama 3.1, Gemma 2, Aya Expanse)
-through local Ollama runners and publishes the page with GitHub Pages. Raw results are
-linked as `data.json` artifacts.
+The leaderboard is a dependency-free static page (sortable table + radar chart) that
+[`.github/workflows/leaderboard.yml`](.github/workflows/leaderboard.yml) is meant to
+regenerate weekly by evaluating a rotating seeded sample of open-source models
+(Qwen 2.5, Llama 3.1, Gemma 2, Aya Expanse) through local Ollama runners on GitHub-hosted
+CPU runners.
 
-<img src="docs/assets/leaderboard.png" alt="PersianEval leaderboard" width="80%">
+**Status: pipeline shipped, no complete public run yet.** The current
+[`data.json`](leaderboard/data.json) has an empty `rows` array — the weekly CPU jobs were
+killed mid-run inside the runner time budget (see the sizing note in the workflow), and
+the committed results so far are the frozen task sets, not model scores. The screenshot
+that used to sit here was a design mock, not a real result — it has been removed until a
+real run fills the table. To produce one, dispatch the workflow with a larger runner (or
+a hosted judge) and let it publish; no code changes are needed.
+
+> This section will say "updated weekly" again once the first full run lands.
 
 ### Adding a task in 15 minutes
 
@@ -129,8 +136,7 @@ PersianEval, please cite (see [`CITATION.cff`](CITATION.cff)):
 دیتاست‌های ترجمه‌شده اغلب با ماشین ترجمه شده‌اند و احتمالاً به داده‌های آموزشی نشت کرده‌اند،
 و چالش‌های «تک‌فارسی» — هم‌گردانی عربی/فارسی (ي/ی، ك/ک)، قواعد نیم‌فاصله، دانش فرهنگی
 ایران — در بیشتر بنچمارک‌ها دیده نمی‌شوند. **PersianEval** این خلأ را پر می‌کند: ۸ تسک
-فریزشده و checksumدار، یک هارنس ارزیابی async و تکرارپذیر، و لیدربوردی که هر هفته
-به‌روز می‌شود و هر کسی می‌تواند آن را ممیزی کند. همه‌چیز — کد، داده، پرامپت، پرسش‌های داور و
+فریزشده و checksumدار، یک هارنس ارزیابی async و تکرارپذیر، و یک خط لولهبورد ممیزی‌پذیر. همه‌چیز — کد، داده، پرامپت، پرسش‌های داور و
 نتایج — با لایسنس Apache-2.0 باز است.
 
 ### تسک‌ها (۸ تسک)
@@ -181,12 +187,17 @@ results  : results/reasoning__demo.parquet
 
 ### لیدربورد
 
-[لیدربورد](https://Abolfazlrwm.github.io/persianeval/) صفحه‌ای استاتیک و بدون وابستگی است
-(جدول قابل مرتب‌سازی + نمودار رادار) که هر دوشنبه توسط
-[`.github/workflows/leaderboard.yml`](.github/workflows/leaderboard.yml) بازتولید می‌شود؛
-این Action نمونه‌ای چرخشی و seedدار از مدل‌های اپن‌سورس (Qwen 2.5، Llama 3.1، Gemma 2 و
-Aya Expanse) را با Ollama ارزیابی و صفحه را با GitHub Pages منتشر می‌کند. نتایج خام به‌صورت
-`data.json` لینک شده‌اند.
+لیدربورد صفحه‌ای استاتیک و بدون وابستگی است (جدول قابل مرتب‌سازی + نمودار رادار) که
+`.github/workflows/leaderboard.yml` قرار است هر هفته با ارزیابی نمونه‌ای چرخشی و seedدار از
+مدل‌های اپن‌سورس (Qwen 2.5، Llama 3.1، Gemma 2 و Aya Expanse) روی رانرهای CPU گیت‌هاب
+بازتولید کند.
+
+**وضعیت: زیرساخت آماده است، ولی هنوز هیچ اجرای کامل منتشرشده‌ای نداریم.** `data.json` فعلی
+آرایه `rows` خالی دارد — کارهای هفتگی CPU میان‌راه kill شده‌اند (بودجهٔ زمانی رانر؛ یادداشت
+اندازه‌گیری داخل workflow) و نتایج کامیت‌شده تا امروز فقط مجموعه‌های تسک فریزشده‌اند، نه
+امتیاز مدل. تصویری که اینجا بود ماک طراحی بود، نه نتیجهٔ واقعی — تا وقتی یک اجرای واقعی جدول
+را پر کند حذف شده است. برای تولیدش، workflow را با رانر بزرگ‌تر (یا داور میزبانی‌شده) اجرا
+کنید؛ تغییر کدی لازم نیست.
 
 ### اضافه‌کردن تسک جدید در ۱۵ دقیقه
 
