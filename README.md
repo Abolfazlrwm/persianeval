@@ -27,11 +27,11 @@
 Persian is spoken by more than 100 million people, yet the LLM ecosystem has almost no
 *trustworthy* way to measure Persian capability. Popular leaderboards barely cover Farsi,
 translated datasets are often machine-translated and leaked into training data, and the
-challenges that are uniquely Persian — Arabic/Persian homoglyphs (ي/ی، ك/ک), half-space
-rules (نیم‌فاصله), the cultural commons of Iran — are invisible to most benchmarks.
+challenges that are uniquely Persian go unseen in most benchmarks: Arabic/Persian
+homoglyphs (ي/ی، ك/ک), half-space rules (نیم‌فاصله), and the cultural commons of Iran.
 **PersianEval** fills that gap with 8 frozen, checksummed tasks, a reproducible async
-evaluation harness, and an auditable leaderboard pipeline. Everything —
-code, data, prompts, judge prompts, scores — is Apache-2.0 and open.
+evaluation harness, and an auditable leaderboard pipeline. Everything (code, data,
+prompts, judge prompts, scores) is Apache-2.0 and open.
 
 ### Tasks (8)
 
@@ -119,7 +119,7 @@ PersianEval, please cite (see [`CITATION.cff`](CITATION.cff)):
   author = {PersianEval Contributors},
   year   = {2026},
   url    = {https://github.com/Abolfazlrwm/persianeval},
-  version= {v0.1.1}
+  version= {v0.1.2}
 }
 ```
 
@@ -134,10 +134,10 @@ PersianEval, please cite (see [`CITATION.cff`](CITATION.cff)):
 بیش از ۱۰۰ میلیون نفر فارسی‌زبان‌اند، اما اکوسیستم مدل‌های زبانی تقریباً هیچ راه *قابل
 اعتمادی* برای سنجش توانایی فارسی ندارد. لیدربوردهای معروف فارسی را پوشش نمی‌دهند،
 دیتاست‌های ترجمه‌شده اغلب با ماشین ترجمه شده‌اند و احتمالاً به داده‌های آموزشی نشت کرده‌اند،
-و چالش‌های «تک‌فارسی» — هم‌گردانی عربی/فارسی (ي/ی، ك/ک)، قواعد نیم‌فاصله، دانش فرهنگی
-ایران — در بیشتر بنچمارک‌ها دیده نمی‌شوند. **PersianEval** این خلأ را پر می‌کند: ۸ تسک
-فریزشده و checksumدار، یک هارنس ارزیابی async و تکرارپذیر، و یک خط لولهبورد ممیزی‌پذیر. همه‌چیز — کد، داده، پرامپت، پرسش‌های داور و
-نتایج — با لایسنس Apache-2.0 باز است.
+و چالش‌های «تک‌فارسی» (هم‌گردانی عربی/فارسی ي/ی، ك/ک؛ قواعد نیم‌فاصله؛ دانش فرهنگی
+ایران) در بیشتر بنچمارک‌ها دیده نمی‌شوند. **PersianEval** این خلأ را پر می‌کند: ۸ تسک
+فریزشده و checksumدار، یک هارنس ارزیابی async و تکرارپذیر، و یک خط لیدربوردِ ممیزی‌پذیر.
+همه‌چیز (کد، داده، پرامپت، پرسش‌های داور و نتایج) با لایسنس Apache-2.0 باز است.
 
 ### تسک‌ها (۸ تسک)
 

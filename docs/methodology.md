@@ -50,7 +50,7 @@ persianeval run --task reasoning --provider ollama --model qwen2.5:7b-instruct -
 persianeval leaderboard --results-dir results --out site
 ```
 
-The weekly action (ADR 0003) evaluates a seeded 50-item subsample per task per model;
+The weekly action (ADR 0003) evaluates a seeded 20-item subsample per task per model;
 seeds follow the ISO week (`date +%G%V`) so each week's subset is deterministic and
 publishable. Full 1600-item runs are done per release.
 
@@ -104,8 +104,8 @@ persianeval run --task reasoning --provider ollama --model qwen2.5:7b-instruct -
 persianeval leaderboard --results-dir results --out site
 ```
 
-اکشن هفتگی (ADR 0003) هر هفته زیرنمونهٔ seedدارِ ۵۰تایی از هر تسک را برای هر مدل می‌سنجد؛ seed از
+اکشن هفتگی (ADR 0003) هر هفته زیرنمونهٔ seedدارِ ۲۰تایی از هر تسک را برای هر مدل می‌سنجد؛ seed از
 شمارهٔ هفتهٔ ISO به دست می‌آید (`date +%G%V`) تا زیرمجموعهٔ هر هفته قطعی و قابل انتشار باشد.
-اجرای کامل ۹۸۰ نمونه‌ای در هر ریلیز انجام می‌شود.
+اجرای کامل ۱۶۰۰ نمونه‌ای در هر ریلیز انجام می‌شود.
 
 </div>
