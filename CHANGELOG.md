@@ -4,6 +4,19 @@ All notable changes to PersianEval are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.2] - 2026-11-23
+
+### Fixed
+
+- `CITATION.cff` was still pinned to 0.1.0 with the original release date;
+  the v0.1.1 fix (7ceae52) only touched the bibtex block in the README.
+  Version and `date-released` now follow the tag.
+- `docs/methodology.md` said the weekly action evaluates a 50-item subsample
+  and that the full corpus is 980 samples. Both numbers predate the 2026-11-17
+  amendment of ADR 0003 (subsample is 20 items) and the v1 corpus (1,600
+  samples); corrected in both the English and Persian sections.
+- Persian README typo: «خط لولهبورد» → «خط لیدربورد».
+
 ## [0.1.1] - 2026-11-15
 
 ### Fixed
@@ -45,4 +58,6 @@ Initial public release.
 - **Docs**: bilingual README/methodology/CONTRIBUTING, task-authoring guide,
   three ADRs, CITATION.cff, Code of Conduct.
 
+[0.1.2]: https://github.com/Abolfazlrwm/persianeval/releases/tag/v0.1.2
+[0.1.1]: https://github.com/Abolfazlrwm/persianeval/releases/tag/v0.1.1
 [0.1.0]: https://github.com/Abolfazlrwm/persianeval/releases/tag/v0.1.0
