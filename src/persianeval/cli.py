@@ -57,7 +57,9 @@ def tasks() -> None:
 def run(
     task: Annotated[str, typer.Option(help="Task name (see `persianeval tasks`).")],
     model: Annotated[str, typer.Option(help="Model identifier, e.g. gpt-4o or qwen2.5:7b-instruct.")],
-    provider: Annotated[str, typer.Option(help="openai | anthropic | ollama | vllm | dummy")] = "openai",
+    provider: Annotated[
+        str, typer.Option(help="openai | anthropic | ollama | vllm | zai | dummy")
+    ] = "openai",
     base_url: Annotated[str | None, typer.Option(help="Endpoint override (vLLM/self-hosted).")] = None,
     org: Annotated[str, typer.Option(help="Organization metadata for the leaderboard.")] = "",
     license_id: Annotated[str, typer.Option("--license", help="Model license metadata.")] = "",

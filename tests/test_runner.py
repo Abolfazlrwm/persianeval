@@ -20,6 +20,7 @@ from persianeval.harness.providers import (
     ProviderError,
     RateLimiter,
     ScriptedProvider,
+    ZaiProvider,
     create_provider,
 )
 from persianeval.harness.results import load_json, save_json, save_parquet
@@ -141,6 +142,43 @@ def test_openai_provider_gives_up_after_retries(monkeypatch: pytest.MonkeyPatch)
     provider._client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
     with pytest.raises(ProviderError, match="failed after 3 attempts"):
         asyncio.run(provider.complete("x"))
+    asyncio.run(provider.aclose())
+
+
+def test_zai_provider_parses_response(monkeypatch: pytest.MonkeyPatch) -> None:
+    def handler(request: httpx.Request) -> httpx.Response:
+        payload = json.loads(request.content)
+        assert payload["model"] == "glm-4-plus"
+        assert request.headers["Authorization"] == "Bearer zai-key"
+        assert request.url.path.endswith("/chat/completions")
+        return httpx.Response(
+            200,
+            json={
+                "choices": [{"message": {"content": "پاسخ"}}],
+                "usage": {"prompt_tokens": 9, "completion_tokens": 4},
+            },
+        )
+
+    monkeypatch.setenv("ZAI_API_KEY", "zai-key")
+    provider = ZaiProvider("glm-4-plus", base_url="https://api.example.test/v4")
+    provider._client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    response = asyncio.run(provider.complete("سلام", system="سیستم"))
+    assert response.text == "پاسخ"
+    assert response.input_tokens == 9 and response.output_tokens == 4
+    asyncio.run(provider.aclose())
+
+
+def test_create_provider_zai_missing_key(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.delenv("ZAI_API_KEY", raising=False)
+    with pytest.raises(ProviderError, match=r"Z\.ai API key missing"):
+        create_provider("zai", "glm-4-plus")
+
+
+def test_zai_provider_defaults_to_public_endpoint(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("ZAI_API_KEY", "zai-key")
+    provider = ZaiProvider("glm-4-plus")
+    assert provider.provider_name == "zai"
+    assert provider._base_url == "https://api.z.ai/api/paas/v4"
     asyncio.run(provider.aclose())
 
 

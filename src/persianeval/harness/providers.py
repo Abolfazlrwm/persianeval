@@ -262,6 +262,42 @@ class OpenAIProvider(BaseProvider):
         return data
 
 
+class ZaiProvider(OpenAIProvider):
+    """Z.ai (Zhipu) Chat Completions provider for GLM models.
+
+    Z.ai exposes an OpenAI-compatible ``/chat/completions`` endpoint, so the
+    request/response handling is inherited from :class:`OpenAIProvider`; only
+    the defaults for the endpoint and the credential differ.
+
+    Args:
+        model: e.g. ``"glm-4-plus"``.
+        base_url: API root; defaults to ``ZAI_BASE_URL`` or
+            ``https://api.z.ai/api/paas/v4``.
+        api_key: Bearer token; defaults to ``ZAI_API_KEY``.
+    """
+
+    provider_name: ClassVar[str] = "zai"
+
+    def __init__(
+        self,
+        model: str,
+        *,
+        base_url: str | None = None,
+        api_key: str | None = None,
+        **kwargs: Any,
+    ) -> None:
+        resolved_key = api_key or os.environ.get("ZAI_API_KEY")
+        if not resolved_key:
+            msg = "Z.ai API key missing: set ZAI_API_KEY or pass api_key explicitly"
+            raise ProviderError(msg)
+        super().__init__(
+            model,
+            base_url=base_url or os.environ.get("ZAI_BASE_URL", "https://api.z.ai/api/paas/v4"),
+            api_key=resolved_key,
+            **kwargs,
+        )
+
+
 class AnthropicProvider(BaseProvider):
     """Anthropic Messages API provider.
 
@@ -455,10 +491,11 @@ def create_provider(
 
     Args:
         provider: One of ``openai``, ``anthropic``, ``ollama``, ``vllm``,
-            ``dummy``.
+            ``zai``, ``dummy``.
         model: Model identifier.
         base_url: Optional endpoint override (``vllm`` requires it or the
-            ``VLLM_BASE_URL`` environment variable).
+            ``VLLM_BASE_URL`` environment variable; ``zai`` accepts it or
+            ``ZAI_BASE_URL``).
         rpm: Requests-per-minute cap for this provider instance.
         timeout_s: HTTP timeout in seconds.
         max_retries: Retry budget per request.
@@ -487,7 +524,9 @@ def create_provider(
             api_key=os.environ.get("VLLM_API_KEY", "EMPTY"),
             **common,
         )
+    if provider == "zai":
+        return ZaiProvider(model, base_url=base_url, **common)
     if provider == "dummy":
         return DummyProvider(model=model, **common)
-    msg = f"unknown provider '{provider}'; expected one of: openai, anthropic, ollama, vllm, dummy"
+    msg = f"unknown provider '{provider}'; expected one of: openai, anthropic, ollama, vllm, zai, dummy"
     raise ProviderError(msg)
