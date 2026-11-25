@@ -4,6 +4,30 @@ All notable changes to PersianEval are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-11-25
+
+### Added
+
+- `zai` provider: evaluate GLM models through Z.ai's OpenAI-compatible Chat
+  Completions endpoint (`ZAI_API_KEY` / `ZAI_BASE_URL`, plus the usual
+  `--base-url` override). It inherits the OpenAI request/response handling
+  and the shared rate-limiter/retry plumbing, and is tested offline like the
+  other providers.
+- First published leaderboard run: GLM-4-Plus (Z.ai hosted API) over the
+  weekly seeded subsample (20 items per task, seed 202648, ISO week 48).
+  Seven of the eight tasks completed; `code_with_persian_comments` was cut
+  short by the API's rate limit and stays pending, so its table cell shows
+  a dash until a re-run lands.
+
+### Changed
+
+- Result JSONs from published runs are now committed under `results/` as the
+  audit trail behind `leaderboard/data.json` (parquet files and caches stay
+  git-ignored). The `site_only=true` dispatch of the leaderboard workflow
+  builds the published page from these committed files.
+- README leaderboard status section now describes the actual run instead of
+  the empty-pipeline state.
+
 ## [0.1.2] - 2026-11-23
 
 ### Fixed
@@ -58,6 +82,7 @@ Initial public release.
 - **Docs**: bilingual README/methodology/CONTRIBUTING, task-authoring guide,
   three ADRs, CITATION.cff, Code of Conduct.
 
+[0.2.0]: https://github.com/Abolfazlrwm/persianeval/releases/tag/v0.2.0
 [0.1.2]: https://github.com/Abolfazlrwm/persianeval/releases/tag/v0.1.2
 [0.1.1]: https://github.com/Abolfazlrwm/persianeval/releases/tag/v0.1.1
 [0.1.0]: https://github.com/Abolfazlrwm/persianeval/releases/tag/v0.1.0

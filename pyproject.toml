@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "persianeval"
-version = "0.1.2"
+version = "0.2.0"
 description = "PersianEval: the first serious open-source benchmark for evaluating LLMs on Persian (Farsi) — 8 tasks, reproducible async harness, weekly leaderboard."
 readme = "README.md"
 requires-python = ">=3.11"
