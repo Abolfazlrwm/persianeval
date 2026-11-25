@@ -53,7 +53,7 @@ prompts, judge prompts, scores) is Apache-2.0 and open.
 
 ```bash
 pip install persianeval
-export OPENAI_API_KEY=sk-...            # or ANTHROPIC_API_KEY / local Ollama
+export OPENAI_API_KEY=sk-...            # or ANTHROPIC_API_KEY / ZAI_API_KEY / local Ollama
 persianeval tasks                       # list the 8 tasks
 persianeval run --task reasoning --provider openai --model gpt-4o-mini --rpm 60
 persianeval leaderboard --results-dir results --out leaderboard   # static site
@@ -86,15 +86,17 @@ regenerate weekly by evaluating a rotating seeded sample of open-source models
 (Qwen 2.5, Llama 3.1, Gemma 2, Aya Expanse) through local Ollama runners on GitHub-hosted
 CPU runners.
 
-**Status: pipeline shipped, no complete public run yet.** The current
-[`data.json`](leaderboard/data.json) has an empty `rows` array — the weekly CPU jobs were
-killed mid-run inside the runner time budget (see the sizing note in the workflow), and
-the committed results so far are the frozen task sets, not model scores. The screenshot
-that used to sit here was a design mock, not a real result — it has been removed until a
-real run fills the table. To produce one, dispatch the workflow with a larger runner (or
-a hosted judge) and let it publish; no code changes are needed.
-
-> This section will say "updated weekly" again once the first full run lands.
+**Status: first real run published (2026-11-25).** GLM-4-Plus (Z.ai hosted API) was
+scored by the same harness on the weekly seeded subsample (20 items per task, seed
+202648 = ISO week 48): overall **82.9**, with spelling, RAG faithfulness and bias at
+100, reading comprehension 90, cultural knowledge 80, reasoning and translation 55.
+Judge-scored tasks are self-judged by the model under evaluation (ADR 0002), so read
+those numbers as directional. The `code_with_persian_comments` run is pending — the
+API's rate limit cut the run short; it will be appended on a re-run and its table cell
+shows a dash until then. Every published score is auditable: the per-item result files
+are committed under [`results/`](results/). The open-source Ollama models (Qwen 2.5,
+Llama 3.1, Gemma 2, Aya Expanse) join the table once a weekly CPU run fits the runner
+budget again.
 
 ### Adding a task in 15 minutes
 
@@ -119,7 +121,7 @@ PersianEval, please cite (see [`CITATION.cff`](CITATION.cff)):
   author = {PersianEval Contributors},
   year   = {2026},
   url    = {https://github.com/Abolfazlrwm/persianeval},
-  version= {v0.1.2}
+  version= {v0.2.0}
 }
 ```
 
@@ -160,7 +162,7 @@ PersianEval, please cite (see [`CITATION.cff`](CITATION.cff)):
 
 ```bash
 pip install persianeval
-export OPENAI_API_KEY=sk-...            # یا ANTHROPIC_API_KEY / مدل محلی با Ollama
+export OPENAI_API_KEY=sk-...            # یا ANTHROPIC_API_KEY / ZAI_API_KEY / مدل محلی با Ollama
 persianeval tasks                       # فهرست ۸ تسک
 persianeval run --task reasoning --provider openai --model gpt-4o-mini --rpm 60
 persianeval leaderboard --results-dir results --out leaderboard   # صفحهٔ استاتیک
@@ -192,12 +194,15 @@ results  : results/reasoning__demo.parquet
 مدل‌های اپن‌سورس (Qwen 2.5، Llama 3.1، Gemma 2 و Aya Expanse) روی رانرهای CPU گیت‌هاب
 بازتولید کند.
 
-**وضعیت: زیرساخت آماده است، ولی هنوز هیچ اجرای کامل منتشرشده‌ای نداریم.** `data.json` فعلی
-آرایه `rows` خالی دارد — کارهای هفتگی CPU میان‌راه kill شده‌اند (بودجهٔ زمانی رانر؛ یادداشت
-اندازه‌گیری داخل workflow) و نتایج کامیت‌شده تا امروز فقط مجموعه‌های تسک فریزشده‌اند، نه
-امتیاز مدل. تصویری که اینجا بود ماک طراحی بود، نه نتیجهٔ واقعی — تا وقتی یک اجرای واقعی جدول
-را پر کند حذف شده است. برای تولیدش، workflow را با رانر بزرگ‌تر (یا داور میزبانی‌شده) اجرا
-کنید؛ تغییر کدی لازم نیست.
+**وضعیت: نخستین اجرای واقعی منتشر شد (۲۰۲۶-۱۱-۲۵).** GLM-4-Plus (API میزبانی‌شدهٔ Z.ai)
+با همان هارنس روی زیرنمونهٔ هفتگی seedدار (۲۰ نمونه در هر تسک، seed ۲۰۲۶۴۸ = هفتهٔ ۴۸ ISO)
+امتیازدهی شد: کلی **۸۲٫۹**؛ املا، وفاداری RAG و تشخیص تعصب ۱۰۰، درک مطلب ۹۰، دانش فرهنگی
+۸۰، استدلال و ترجمه ۵۵. در تسک‌های داوری، همان مدلِ تحت ارزیابی داوری کرده است (ADR 0002)؛
+پس این اعداد را جهت‌نما بدانید. اجرای `code_with_persian_comments` به‌خاطر محدودیت نرخ API
+ناقص مانده و در اجرای بعدی اضافه می‌شود؛ تا آن موقع سلول جدول خط تیره نشان می‌دهد. هر
+امتیاز منتشرشده قابل ممیزی است: فایل‌های نتیجهٔ تک‌تک آیتم‌ها در [`results/`](results/)
+کامیت شده‌اند. مدل‌های اپن‌سورس Ollama (Qwen 2.5، Llama 3.1، Gemma 2، Aya Expanse) وقتی
+بودجهٔ رانر CPU اجازهٔ اجرای هفتگی بدهد به جدول اضافه می‌شوند.
 
 ### اضافه‌کردن تسک جدید در ۱۵ دقیقه
 

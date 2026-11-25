@@ -1,0 +1,284 @@
+{
+  "schema_version": "1.0",
+  "run_id": "8dd361f72360",
+  "task": "translation_fa_en",
+  "model": "glm-4-plus",
+  "provider": "zai",
+  "org": "Z.ai",
+  "license": "Proprietary (hosted API)",
+  "seed": 202648,
+  "temperature": 0.0,
+  "max_tokens": 1024,
+  "concurrency": 1,
+  "started_at": "2026-11-25T07:39:01+00:00",
+  "finished_at": "2026-11-25T07:43:06+00:00",
+  "n_items": 20,
+  "n_cached": 19,
+  "metrics": {
+    "accuracy": 0.55,
+    "mean_score": 0.59,
+    "avg_latency_ms": 11214.16
+  },
+  "items": [
+    {
+      "id": "translation_fa_en-0019",
+      "score": 0.0,
+      "passed": false,
+      "response": "This dress is not suitable for a wedding.",
+      "expected": "These clothes are not suitable for a wedding.",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "ترجمهٔ مدل به‌طور کامل وفادار به معنای جملهٔ مرجع نیست. جملهٔ مرجع به لباس‌ها (جمع) اشاره دارد، در حالی که ترجمهٔ مدل به یک لباس خاص (تک) اشاره می‌کند. این تغییر معنایی، امتیاز را به صفر می‌رساند."
+      },
+      "latency_ms": 60910.52,
+      "cached": true
+    },
+    {
+      "id": "translation_fa_en-0026",
+      "score": 1.0,
+      "passed": true,
+      "response": "I prefer coffee to tea.",
+      "expected": "I prefer coffee to tea.",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "ترجمه دقیقاً با متن مرجع مطابقت دارد و هیچ تغییری در معنا، ساختار یا لحن ایجاد نکرده است."
+      },
+      "latency_ms": 1757.89,
+      "cached": true
+    },
+    {
+      "id": "translation_fa_en-0033",
+      "score": 0.0,
+      "passed": false,
+      "response": "He cut her off and left.",
+      "expected": "He cut off his speech and left.",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "خطای معنایی شدید: مدل 'her' را به جای 'his speech' ترجمه کرده که معنای جمله را کاملاً تغییر می‌دهد."
+      },
+      "latency_ms": 1161.69,
+      "cached": true
+    },
+    {
+      "id": "translation_fa_en-0039",
+      "score": 1.0,
+      "passed": true,
+      "response": "I have never taken this path.",
+      "expected": "I have never taken this route.",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "ترجمهٔ مدل وفادار به معنای اصلی است، روان و طبیعی است و لحن جمله را حفظ کرده است. تفاوت بین 'route' و 'path' در این زمینه جزئی و سبکی است و تأثیری بر دقت معنایی ندارد."
+      },
+      "latency_ms": 1484.66,
+      "cached": true
+    },
+    {
+      "id": "translation_fa_en-0041",
+      "score": 1.0,
+      "passed": true,
+      "response": "Whatever will be, will be.",
+      "expected": "Come what may.",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "ترجمهٔ مدل وفادار به معنای مرجع است، روان و طبیعی است و لحن مشابهی دارد."
+      },
+      "latency_ms": 1031.44,
+      "cached": true
+    },
+    {
+      "id": "translation_fa_en-0044",
+      "score": 0.0,
+      "passed": false,
+      "response": "You've seen a camel, you haven't.",
+      "expected": "When you see a camel, pretend you did not (mind what is better left unmentioned).",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "ترجمهٔ مدل به‌طور کامل معنای جملهٔ مرجع را از دست داده است. جملهٔ مرجع یک توصیهٔ فرهنگی یا اجتماعی با لحنی کنایه‌آمیز است، در حالی که ترجمهٔ مدل یک جملهٔ ساده و بی‌ربط دربارهٔ دیدن یک شتر است. این ترجمه نه تنها وفادار به معنی نیست، بلکه لحن و مفهوم اصلی جمله را کاملاً نادیده گرفته است."
+      },
+      "latency_ms": 2130.82,
+      "cached": true
+    },
+    {
+      "id": "translation_fa_en-0049",
+      "score": 0.3,
+      "passed": false,
+      "response": "What you give is what you get.",
+      "expected": "What goes around comes around.",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "ترجمهٔ مدل، مفهوم 'بازگشت اعمال' را به‌طور کامل از دست داده و به‌جای آن، یک ایدهٔ متفاوت و مستقیم ('داده‌ای که می‌دهی، همان چیزی است که می‌گیری') را بیان می‌کند. این تغییر معنایی اساسی، وفاداری جمله را از بین می‌برد."
+      },
+      "latency_ms": 33265.21,
+      "cached": true
+    },
+    {
+      "id": "translation_fa_en-0095",
+      "score": 0.0,
+      "passed": false,
+      "response": "خواهرم معماری در دانشگاه می‌خواند.",
+      "expected": "خواهرم در دانشگاه معماری می‌خواند.",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "ترجمهٔ مدل خطای معنایی دارد. در ترجمهٔ مرجع، خواهرم در رشتهٔ معماری در دانشگاه تحصیل می‌کند، اما در ترجمهٔ مدل، معنای جمله به این تغییر یافته است که خواهرم معماری (به عنوان یک فعالیت) در دانشگاه انجام می‌دهد. این تغییر معنایی، ترجمه را نامعتبر می‌کند."
+      },
+      "latency_ms": 21117.7,
+      "cached": true
+    },
+    {
+      "id": "translation_fa_en-0110",
+      "score": 1.0,
+      "passed": true,
+      "response": "I will send you the travel photos.",
+      "expected": "I will send you the photos of the trip.",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "ترجمهٔ مدل وفادار به معنای جملهٔ مرجع است، روان و طبیعی به نظر می‌رسد و لحن آن حفظ شده است."
+      },
+      "latency_ms": 1225.17,
+      "cached": true
+    },
+    {
+      "id": "translation_fa_en-0113",
+      "score": 1.0,
+      "passed": true,
+      "response": "I had left my umbrella at home.",
+      "expected": "I had left my umbrella at home.",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "ترجمه کاملاً دقیق، روان و وفادار به متن اصلی است. هیچ‌گونه اضافه یا حذفی در معنا وجود ندارد و لحن جمله به‌درستی حفظ شده است."
+      },
+      "latency_ms": 1216.69,
+      "cached": true
+    },
+    {
+      "id": "translation_fa_en-0125",
+      "score": 1.0,
+      "passed": true,
+      "response": "You cannot carry two watermelons in one hand.",
+      "expected": "You cannot carry two watermelons with one hand (you cannot do two things at once).",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "ترجمهٔ مدل وفادار به معنای جملهٔ مرجع است، روان و طبیعی به نظر می‌رسد و لحن آن حفظ شده است. تفاوت جزئی در حرف اضافه (با/در) بر امتیاز تأثیری ندارد."
+      },
+      "latency_ms": 1453.2,
+      "cached": true
+    },
+    {
+      "id": "translation_fa_en-0146",
+      "score": 1.0,
+      "passed": true,
+      "response": "What time is our appointment?",
+      "expected": "What time is our appointment?",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "ترجمه دقیقاً با متن مرجع مطابقت دارد و هیچ تغییری در معنا، لحن یا ساختار ایجاد نکرده است."
+      },
+      "latency_ms": 2400.84,
+      "cached": true
+    },
+    {
+      "id": "translation_fa_en-0162",
+      "score": 1.0,
+      "passed": true,
+      "response": "آشپزخانه بوی نان تازه می‌دهد.",
+      "expected": "آشپزخانه بوی نان تازه می‌دهد.",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "ترجمه دقیقاً با متن مرجع مطابقت دارد و از نظر معنایی، سبکی و ساختاری کاملاً صحیح و طبیعی است."
+      },
+      "latency_ms": 31118.55,
+      "cached": true
+    },
+    {
+      "id": "translation_fa_en-0164",
+      "score": 0.0,
+      "passed": false,
+      "response": "پسرعموم راننده تاکسی است.",
+      "expected": "داییم رانندهٔ تاکسی است.",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "ترجمه به‌شدت نادرست است. 'پسرعموم' (cousin) به‌جای 'داییم' (driver) ترجمه شده که یک خطای معنایی اساسی و تغییر کامل معناست."
+      },
+      "latency_ms": 22017.12,
+      "cached": true
+    },
+    {
+      "id": "translation_fa_en-0165",
+      "score": 0.5,
+      "passed": false,
+      "response": "ما به خاطر برف خانه ماندیم.",
+      "expected": "به‌خاطر برف در خانه ماندیم.",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "ترجمهٔ مدل از نظر معنایی صحیح است اما ساختار آن در فارسی روان و طبیعی نیست. استفاده از حرف اضافهٔ 'به' قبل از 'خاطر' در فارسی رایج و صحیح است و حذف آن باعث می‌شود جمله کمی غیرطبیعی به نظر برسد. با وجود اینکه معنای جمله کاملاً منتقل شده، این ناهماهنگی در ساختار، امتیاز را به‌طور قابل توجهی کاهش می‌دهد."
+      },
+      "latency_ms": 2679.15,
+      "cached": true
+    },
+    {
+      "id": "translation_fa_en-0167",
+      "score": 1.0,
+      "passed": true,
+      "response": "همه تخم‌مرغ‌ها را در یک سبد نگذار.",
+      "expected": "همهٔ تخم‌مرغ‌ها را در یک سبد نگذار.",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "ترجمهٔ مدل وفادار به معنای اصلی است، روان و طبیعی به نظر می‌رسد و لحن جمله را حفظ کرده است. تفاوت جزئی در فاصلهٔ قبل از «را» در ترجمهٔ مدل، که در فارسی رایج است، بر امتیاز تأثیری ندارد."
+      },
+      "latency_ms": 1698.03,
+      "cached": true
+    },
+    {
+      "id": "translation_fa_en-0168",
+      "score": 0.0,
+      "passed": false,
+      "response": "ترکی بهتر از نبودن.",
+      "expected": "دیر رسیدن بهتر از نرسیدن است.",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "ترجمهٔ مدل به‌طور کامل معنای جملهٔ مرجع را تغییر داده است. 'ترکی' هیچ ارتباطی با مفهوم 'دیر رسیدن' ندارد و این ترجمه به‌طور کلی معنای جمله را از دست داده است."
+      },
+      "latency_ms": 1419.56,
+      "cached": true
+    },
+    {
+      "id": "translation_fa_en-0176",
+      "score": 1.0,
+      "passed": true,
+      "response": "این کنفرانس ماه آینده در دانشگاه برگزار خواهد شد.",
+      "expected": "کنفرانس ماه آینده در دانشگاه برگزار خواهد شد.",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "ترجمهٔ مدل وفادار به معنای جملهٔ مرجع است، هیچ اطلاعاتی اضافه یا حذف نشده و از نظر دستوری و واژگانی کاملاً طبیعی و روان است."
+      },
+      "latency_ms": 1330.75,
+      "cached": true
+    },
+    {
+      "id": "translation_fa_en-0178",
+      "score": 1.0,
+      "passed": true,
+      "response": "صادرات محصولات کشاورزی در سال جاری افزایش یافت.",
+      "expected": "صادرات محصولات کشاورزی امسال افزایش یافت.",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "ترجمهٔ مدل وفادار به معنای جملهٔ مرجع است، روان و طبیعی به نظر می‌رسد و لحن آن حفظ شده است. تفاوت جزئی در انتخاب کلمه ('امسال' در مقابل 'در سال جاری') تأثیری بر امتیاز ندارد."
+      },
+      "latency_ms": 31444.75,
+      "cached": true
+    },
+    {
+      "id": "translation_fa_en-0181",
+      "score": 0.0,
+      "passed": false,
+      "response": "دانشمندان در مورد تأثیرات تغییرات هشدار می‌دهند.",
+      "expected": "دانشمندان دربارهٔ اثرهای تغییر اقلیم هشدار می‌دهند.",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "ترجمهٔ مدل به‌شدار ناقص است. عبارت 'در مورد تأثیرات تغییرات' به‌درستی ترجمهٔ 'effects of climate change' را انجام نمی‌دهد و 'تغییرات' به‌جای 'اقلیم' آمده است. این ترجمهٔ تحت‌اللفظی و ناقص، معنای اصلی جمله را از بین برده است."
+      },
+      "latency_ms": 3419.54,
+      "cached": false
+    }
+  ]
+}

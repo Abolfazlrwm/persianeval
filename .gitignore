@@ -15,10 +15,13 @@ venv/
 coverage.xml
 htmlcov/
 
-# PersianEval runtime artifacts (results are produced by runs / CI, never committed by hand)
+# PersianEval runtime artifacts: caches and parquet files are run-local, but
+# committed result JSONs are deliberate — they are the audit trail behind the
+# leaderboard and the fallback the site_only workflow deploy publishes from.
 .persianeval_cache/
 results/*
 !results/README.md
+!results/*.json
 
 # OS / editor
 .DS_Store

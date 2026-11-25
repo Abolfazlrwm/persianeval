@@ -1,4 +1,22 @@
 {
-  "generated_at": "2026-11-12T12:38:14+00:00",
-  "rows": []
+  "generated_at": "2026-11-25T14:52:16+00:00",
+  "rows": [
+    {
+      "model": "glm-4-plus",
+      "org": "Z.ai",
+      "license": "Proprietary (hosted API)",
+      "overall": 82.9,
+      "tasks": {
+        "bias_detection": 100.0,
+        "cultural_knowledge": 80.0,
+        "rag_faithfulness": 100.0,
+        "reading_comprehension": 90.0,
+        "reasoning": 55.0,
+        "spelling": 100.0,
+        "translation_fa_en": 55.0
+      },
+      "colors": "#0ea5a4",
+      "rank": 1
+    }
+  ]
 }

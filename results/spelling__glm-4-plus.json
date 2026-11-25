@@ -1,0 +1,304 @@
+{
+  "schema_version": "1.0",
+  "run_id": "bdc19afb638c",
+  "task": "spelling",
+  "model": "glm-4-plus",
+  "provider": "zai",
+  "org": "Z.ai",
+  "license": "Proprietary (hosted API)",
+  "seed": 202648,
+  "temperature": 0.0,
+  "max_tokens": 1024,
+  "concurrency": 1,
+  "started_at": "2026-11-25T07:14:56+00:00",
+  "finished_at": "2026-11-25T07:16:59+00:00",
+  "n_items": 20,
+  "n_cached": 2,
+  "metrics": {
+    "accuracy": 1.0,
+    "mean_score": 1.0,
+    "avg_latency_ms": 0.1
+  },
+  "items": [
+    {
+      "id": "spelling-0019",
+      "score": 1.0,
+      "passed": true,
+      "response": "الف) کلان",
+      "expected": "کلان",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 0.6667,
+        "contained": true
+      },
+      "latency_ms": 0.08,
+      "cached": true
+    },
+    {
+      "id": "spelling-0026",
+      "score": 1.0,
+      "passed": true,
+      "response": "ب) کاشانه",
+      "expected": "کاشانه",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 0.8571,
+        "contained": true
+      },
+      "latency_ms": 0.04,
+      "cached": true
+    },
+    {
+      "id": "spelling-0033",
+      "score": 1.0,
+      "passed": true,
+      "response": "کوشش",
+      "expected": "کوشش",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 1.0,
+        "contained": true
+      },
+      "latency_ms": 0.09,
+      "cached": false
+    },
+    {
+      "id": "spelling-0039",
+      "score": 1.0,
+      "passed": true,
+      "response": "الف) کدبانو",
+      "expected": "کدبانو",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 0.75,
+        "contained": true
+      },
+      "latency_ms": 0.09,
+      "cached": false
+    },
+    {
+      "id": "spelling-0041",
+      "score": 1.0,
+      "passed": true,
+      "response": "الف) کیلومتر",
+      "expected": "کیلومتر",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 0.7778,
+        "contained": true
+      },
+      "latency_ms": 0.09,
+      "cached": false
+    },
+    {
+      "id": "spelling-0044",
+      "score": 1.0,
+      "passed": true,
+      "response": "ب) کانون",
+      "expected": "کانون",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 0.8333,
+        "contained": true
+      },
+      "latency_ms": 0.08,
+      "cached": false
+    },
+    {
+      "id": "spelling-0049",
+      "score": 1.0,
+      "passed": true,
+      "response": "الف) کاوه",
+      "expected": "کاوه",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 0.6667,
+        "contained": true
+      },
+      "latency_ms": 0.09,
+      "cached": false
+    },
+    {
+      "id": "spelling-0095",
+      "score": 1.0,
+      "passed": true,
+      "response": "بله",
+      "expected": "بله",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 1.0,
+        "contained": true
+      },
+      "latency_ms": 0.07,
+      "cached": false
+    },
+    {
+      "id": "spelling-0110",
+      "score": 1.0,
+      "passed": true,
+      "response": "بله",
+      "expected": "بله",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 1.0,
+        "contained": true
+      },
+      "latency_ms": 0.1,
+      "cached": false
+    },
+    {
+      "id": "spelling-0113",
+      "score": 1.0,
+      "passed": true,
+      "response": "بله",
+      "expected": "بله",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 1.0,
+        "contained": true
+      },
+      "latency_ms": 0.07,
+      "cached": false
+    },
+    {
+      "id": "spelling-0125",
+      "score": 1.0,
+      "passed": true,
+      "response": "دیروز من یک کارنامه جدید خریدم.",
+      "expected": "دیروز من یک کارنامه جدید خریدم.",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 1.0,
+        "contained": true
+      },
+      "latency_ms": 0.13,
+      "cached": false
+    },
+    {
+      "id": "spelling-0146",
+      "score": 1.0,
+      "passed": true,
+      "response": "دیروز من یک یخ جدید خریدم.",
+      "expected": "دیروز من یک یخ جدید خریدم.",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 1.0,
+        "contained": true
+      },
+      "latency_ms": 0.11,
+      "cached": false
+    },
+    {
+      "id": "spelling-0162",
+      "score": 1.0,
+      "passed": true,
+      "response": "این کرم را از بازار تهیه کن.",
+      "expected": "این کرم را از بازار تهیه کن.",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 1.0,
+        "contained": true
+      },
+      "latency_ms": 0.11,
+      "cached": false
+    },
+    {
+      "id": "spelling-0164",
+      "score": 1.0,
+      "passed": true,
+      "response": "این کاشانه را از بازار تهیه کن.",
+      "expected": "این کاشانه را از بازار تهیه کن.",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 1.0,
+        "contained": true
+      },
+      "latency_ms": 0.12,
+      "cached": false
+    },
+    {
+      "id": "spelling-0165",
+      "score": 1.0,
+      "passed": true,
+      "response": "این کوشش را از بازار تهیه کن.",
+      "expected": "این کوشش را از بازار تهیه کن.",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 1.0,
+        "contained": true
+      },
+      "latency_ms": 0.12,
+      "cached": false
+    },
+    {
+      "id": "spelling-0167",
+      "score": 1.0,
+      "passed": true,
+      "response": "«این یخچال را از بازار تهیه کن.»",
+      "expected": "این یخچال را از بازار تهیه کن.",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 1.0,
+        "contained": true
+      },
+      "latency_ms": 0.12,
+      "cached": false
+    },
+    {
+      "id": "spelling-0168",
+      "score": 1.0,
+      "passed": true,
+      "response": "این یاری را از بازار تهیه کن.",
+      "expected": "این یاری را از بازار تهیه کن.",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 1.0,
+        "contained": true
+      },
+      "latency_ms": 0.12,
+      "cached": false
+    },
+    {
+      "id": "spelling-0176",
+      "score": 1.0,
+      "passed": true,
+      "response": "ب) می‌کنیم",
+      "expected": "می‌کنیم",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 0.875,
+        "contained": true
+      },
+      "latency_ms": 0.09,
+      "cached": false
+    },
+    {
+      "id": "spelling-0178",
+      "score": 1.0,
+      "passed": true,
+      "response": "ب) می‌رسد",
+      "expected": "می‌رسد",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 0.8571,
+        "contained": true
+      },
+      "latency_ms": 0.1,
+      "cached": false
+    },
+    {
+      "id": "spelling-0181",
+      "score": 1.0,
+      "passed": true,
+      "response": "هم‌راه",
+      "expected": "هم‌راه",
+      "scorer": "fuzzy@0.90",
+      "details": {
+        "similarity": 1.0,
+        "contained": true
+      },
+      "latency_ms": 0.08,
+      "cached": false
+    }
+  ]
+}
