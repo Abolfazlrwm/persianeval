@@ -1,0 +1,284 @@
+{
+  "schema_version": "1.0",
+  "run_id": "d61dd4966916",
+  "task": "code_with_persian_comments",
+  "model": "glm-4-plus",
+  "provider": "zai",
+  "org": "Z.ai",
+  "license": "Proprietary (hosted API)",
+  "seed": 202648,
+  "temperature": 0.0,
+  "max_tokens": 1024,
+  "concurrency": 1,
+  "started_at": "2026-11-25T16:03:26+00:00",
+  "finished_at": "2026-11-25T16:06:42+00:00",
+  "n_items": 20,
+  "n_cached": 18,
+  "metrics": {
+    "accuracy": 0.8,
+    "mean_score": 0.86,
+    "avg_latency_ms": 7280.83
+  },
+  "items": [
+    {
+      "id": "code_with_persian_comments-0019",
+      "score": 1.0,
+      "passed": true,
+      "response": "```python\ndef reverse_string(text: str) -> str:\n    \"\"\"معکوس رشتهٔ ورودی را برمی‌گرداند.\"\"\"\n    reversed_text = \"\"\n    for char in text:\n        reversed_text = char + reversed_text\n    return reversed_text\n```",
+      "expected": "def reverse_string(text: str) -> str:\n    result = ''\n    for char in text:\n        result = char + result\n    return result",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد ارائه‌شده الگوریتم صحیحی برای معکوس کردن رشته پیاده‌سازی کرده است. حلقه `for` کاراکترها را به ترتیب از ابتدا به انتها می‌خواند و هر کاراکتر را به ابتدای رشته جدید `reversed_text` اضافه می‌کند. این روش به درستی رشته را معکوس می‌کند. امضای تابع (`def reverse_string(text: str) -> str:`) کاملاً حفظ شده و با تست‌های مورد انتظار مطابقت دارد. کد همچنین حالت‌های مرزی مانند رشته خالی و رشته تک‌کاراکتری را به درستی مدیریت می‌کند. از هیچ تابع داخلی ممنوعه‌ای استفاده نشده است."
+      },
+      "latency_ms": 2676.35,
+      "cached": true
+    },
+    {
+      "id": "code_with_persian_comments-0026",
+      "score": 1.0,
+      "passed": true,
+      "response": "```python\ndef reverse_string(text: str) -> str:\n    \"\"\"معکوس رشتهٔ ورودی را برمی‌گرداند.\"\"\"\n    # پیاده‌سازی شما\n    reversed_text = \"\"\n    for char in text:\n        reversed_text = char + reversed_text\n    return reversed_text\n```",
+      "expected": "def reverse_string(text: str) -> str:\n    result = ''\n    for char in text:\n        result = char + result\n    return result",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد ارائه‌شده با موفقیت تمام تست‌های مورد انتظار را پاس می‌کند. الگوریتم به درستی رشته را معکوس می‌کند، امضای تابع کاملاً حفظ شده و حالت‌های مرزی مانند رشته خالی و رشته تک‌حرفی به درستی مدیریت می‌شوند. پیاده‌سازی بدون استفاده از توابع داخلی ممنوعه صورت تمرین انجام شده است."
+      },
+      "latency_ms": 1624.7,
+      "cached": true
+    },
+    {
+      "id": "code_with_persian_comments-0033",
+      "score": 1.0,
+      "passed": true,
+      "response": "```python\ndef count_char(text: str, target: str) -> int:\n    \"\"\"تعداد تکرار کاراکتر target در متن را می‌شمارد (حساس به بزرگی و کوچکی).\"\"\"\n    count = 0\n    for char in text:\n        if char == target:\n            count += 1\n    return count\n```",
+      "expected": "def count_char(text: str, target: str) -> int:\n    count = 0\n    for char in text:\n        if char == target:\n            count += 1\n    return count",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد ارائه‌شده الگوریتم صحیحی را پیاده‌سازی کرده است. با استفاده از یک حلقه `for`، تک‌تک کاراکترهای رشته `text` را بررسی کرده و در صورت برابر بودن با `target`، یک واحد به شمارنده `count` اضافه می‌کند. این پیاده‌سازی دقیقاً مطابق با امضای تابع و کامنت‌های فارسی آن است و تمام تست‌های مورد انتظار را به درستی پاسخ می‌دهد. همچنین حالت مرزی متن خالی نیز به درستی مدیریت شده است."
+      },
+      "latency_ms": 1832.94,
+      "cached": true
+    },
+    {
+      "id": "code_with_persian_comments-0039",
+      "score": 1.0,
+      "passed": true,
+      "response": "```python\ndef count_char(text: str, target: str) -> int:\n    \"\"\"تعداد تکرار کاراکتر target در متن را می‌شمارد (حساس به بزرگی و کوچکی).\"\"\"\n    count = 0\n    for char in text:\n        if char == target:\n            count += 1\n    return count\n```",
+      "expected": "def count_char(text: str, target: str) -> int:\n    count = 0\n    for char in text:\n        if char == target:\n            count += 1\n    return count",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد ارائه‌شده الگوریتم صحیحی را پیاده‌سازی کرده است. با استفاده از یک حلقه `for`، تک‌تک کاراکترهای رشته `text` را بررسی کرده و در صورت برابر بودن با `target`، یک واحد به شمارنده `count` اضافه می‌کند. این پیاده‌سازی دقیقاً مطابق با امضای تابع و کامنت‌های فارسی آن است و تمام تست‌های مورد انتظار را به درستی پاسخ می‌دهد. همچنین حالت‌های مرزی مانند رشته خالی نیز به درستی مدیریت می‌شود."
+      },
+      "latency_ms": 2089.88,
+      "cached": true
+    },
+    {
+      "id": "code_with_persian_comments-0041",
+      "score": 1.0,
+      "passed": true,
+      "response": "```python\ndef max_without_builtin(numbers: list[int]) -> int:\n    \"\"\"بزرگ‌ترین عدد لیست را بدون استفاده از تابع max برمی‌گرداند. لیست همیشه ناخالی است.\"\"\"\n    max_num = numbers[0]\n    for num in numbers:\n        if num > max_num:\n            max_num = num\n    return max_num\n```",
+      "expected": "def max_without_builtin(numbers: list[int]) -> int:\n    largest = numbers[0]\n    for value in numbers[1:]:\n        if value > largest:\n            largest = value\n    return largest",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد ارائه‌شده الگوریتم صحیحی را پیاده‌سازی کرده است. با فرض اینکه لیست ناخالی است، اولین عنصر به عنوان مقدار اولیه `max_num` انتخاب می‌شود. سپس با استفاده از یک حلقه، تمام عناصر لیست با `max_num` مقایسه می‌شوند. هرگاه عددی بزرگتر از `max_num` یافت شود، مقدار `max_num` به‌روز می‌شود. در پایان، بزرگ‌ترین عدد در لیست بازگردانده می‌شود. امضای تابع کاملاً حفظ شده و از هیچ تابع داخلی ممنوعه‌ای استفاده نشده است. الگوریتم در تمام تست‌های مورد انتظار به درستی عمل می‌کند."
+      },
+      "latency_ms": 2684.42,
+      "cached": true
+    },
+    {
+      "id": "code_with_persian_comments-0044",
+      "score": 1.0,
+      "passed": true,
+      "response": "```python\ndef max_without_builtin(numbers: list[int]) -> int:\n    \"\"\"بزرگ‌ترین عدد لیست را بدون استفاده از تابع max برمی‌گرداند. لیست همیشه ناخالی است.\"\"\"\n    max_num = numbers[0]\n    for num in numbers:\n        if num > max_num:\n            max_num = num\n    return max_num\n```",
+      "expected": "def max_without_builtin(numbers: list[int]) -> int:\n    largest = numbers[0]\n    for value in numbers[1:]:\n        if value > largest:\n            largest = value\n    return largest",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد ارائه‌شده الگوریتم صحیحی را پیاده‌سازی کرده است. با فرض اینکه لیست ورودی همیشه ناخالی است (طبق کامنت تابع)، مقدار اول لیست به عنوان `max_num` در نظر گرفته شده و سپس با بقیه اعداد مقایسه می‌شود. هر عدد بزرگتر از `max_num` فعلی، جایگزین آن می‌شود. در نهایت، بزرگ‌ترین عدد باقی‌مانده بازگردانده می‌شود. این الگوریتم برای تمام تست‌های مورد انتظار پاسخ صحیح برمی‌گرداند. امضای تابع و کامنت‌های فارسی نیز به درستی حفظ شده‌اند."
+      },
+      "latency_ms": 1957.95,
+      "cached": true
+    },
+    {
+      "id": "code_with_persian_comments-0049",
+      "score": 1.0,
+      "passed": true,
+      "response": "```python\ndef max_without_builtin(numbers: list[int]) -> int:\n    \"\"\"بزرگ‌ترین عدد لیست را بدون استفاده از تابع max برمی‌گرداند. لیست همیشه ناخالی است.\"\"\"\n    max_num = numbers[0]\n    for num in numbers:\n        if num > max_num:\n            max_num = num\n    return max_num\n```",
+      "expected": "def max_without_builtin(numbers: list[int]) -> int:\n    largest = numbers[0]\n    for value in numbers[1:]:\n        if value > largest:\n            largest = value\n    return largest",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد ارائه‌شده الگوریتم صحیحی را پیاده‌سازی کرده است. یک متغیر `max_num` با اولین عنصر لیست مقداردهی اولیه شده و سپس در یک حلقه، تمام عناصر لیست با این مقدار مقایسه می‌شوند. هرگاه عددی بزرگتر از `max_num` پیدا شود، مقدار `max_num` به‌روز می‌شود. در نهایت، بزرگ‌ترین عدد در لیست بازگردانده می‌شود. امضای تابع کاملاً حفظ شده و کد بدون استفاده از توابع داخلی ممنوعه، مسئله را حل می‌کند. الگوریتم در تمام تست‌های مورد انتظار به درستی عمل می‌کند."
+      },
+      "latency_ms": 49256.82,
+      "cached": true
+    },
+    {
+      "id": "code_with_persian_comments-0095",
+      "score": 1.0,
+      "passed": true,
+      "response": "```python\ndef gcd(a: int, b: int) -> int:\n    \"\"\"بزرگ‌ترین مقسوم‌علیه مشترک دو عدد را با الگوریتم اقلیدسی برمی‌گرداند.\"\"\"\n    while b:\n        a, b = b, a % b\n    return a\n```",
+      "expected": "def gcd(a: int, b: int) -> int:\n    while b:\n        a, b = b, a % b\n    return a",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد ارائه‌شده الگوریتم اقلیدسی را به درستی پیاده‌سازی کرده و امضای تابع را دقیقاً حفظ کرده است. این پیاده‌سازی برای تمام تست‌های مورد انتظار، از جمله حالت‌های مرزی مانند اعداد اول و اعداد یکسان، خروجی صحیح برمی‌گرداند. کد خوانا، کارآمد و مطابق با الزامات تمرین است."
+      },
+      "latency_ms": 2117.84,
+      "cached": true
+    },
+    {
+      "id": "code_with_persian_comments-0110",
+      "score": 1.0,
+      "passed": true,
+      "response": "```python\ndef count_words(sentence: str) -> int:\n    \"\"\"تعداد کلمه‌های جمله را برمی‌گرداند (کلمه‌ها با فاصله جدا شده‌اند).\"\"\"\n    if not sentence:\n        return 0\n    \n    word_count = 0\n    in_word = False\n    \n    for char in sentence:\n        if char != ' ':\n            if not in_word:\n                word_count += 1\n                in_word = True\n        else:\n            in_word = False\n    \n    return word_count\n```",
+      "expected": "def count_words(sentence: str) -> int:\n    return len(sentence.split())",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد ارائه‌شده الگوریتم صحیحی برای شمارش کلمات با در نظر گرفتن فاصله‌های متوالی پیاده‌سازی کرده است. با استفاده از یک حلقه و یک پرچم (in_word)، کلمات را به درستی تشخیص و شمارش می‌کند. امضای تابع کاملاً حفظ شده و حالت مرزی جمله خالی نیز به درستی مدیریت می‌شود. کد تمام تست‌های مورد انتظار را پاسخ می‌دهد."
+      },
+      "latency_ms": 1718.52,
+      "cached": true
+    },
+    {
+      "id": "code_with_persian_comments-0113",
+      "score": 1.0,
+      "passed": true,
+      "response": "```python\ndef count_words(sentence: str) -> int:\n    \"\"\"تعداد کلمه‌های جمله را برمی‌گرداند (کلمه‌ها با فاصله جدا شده‌اند).\"\"\"\n    if not sentence:\n        return 0\n    \n    word_count = 0\n    in_word = False\n    \n    for char in sentence:\n        if char != ' ':\n            if not in_word:\n                word_count += 1\n                in_word = True\n        else:\n            in_word = False\n    \n    return word_count\n```",
+      "expected": "def count_words(sentence: str) -> int:\n    return len(sentence.split())",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد ارائه‌شده الگوریتم صحیحی برای شمارش کلمات با در نظر گرفتن فاصله‌های متوالی پیاده‌سازی کرده است. حلقه `for` کاراکتر به کاراکتر جمله را پردازش کرده و با استفاده از یک پرچم `in_word`، شروع و پایان هر کلمه را تشخیص می‌دهد. این رویکرد به درستی حالت‌های مرزی مانند رشته خالی، کلمات با فاصله‌های متعدد و جمله تک کلمه‌ای را مدیریت می‌کند. امضای تابع کاملاً حفظ شده و کامنت‌های فارسی نیز رعایت شده‌اند. الگوریتم در تمام تست‌های مورد انتظار به درستی عمل می‌کند."
+      },
+      "latency_ms": 2383.66,
+      "cached": true
+    },
+    {
+      "id": "code_with_persian_comments-0125",
+      "score": 1.0,
+      "passed": true,
+      "response": "```python\ndef flatten_one_level(nested: list[list[int]]) -> list[int]:\n    \"\"\"لیستی از لیست‌ها را فقط یک سطح صاف می‌کند.\"\"\"\n    result = []\n    for sublist in nested:\n        for item in sublist:\n            result.append(item)\n    return result\n```",
+      "expected": "def flatten_one_level(nested: list[list[int]]) -> list[int]:\n    result = []\n    for inner in nested:\n        result.extend(inner)\n    return result",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد ارائه‌شده الگوریتم صحیحی برای صاف کردن لیست‌ها در یک سطح دارد. حلقه بیرونی روی لیست اصلی و حلقه درونی روی هر زیرلیست تکرار می‌شود و هر آیتم را به لیست نتیجه اضافه می‌کند. امضای تابع دقیقاً مطابق با صورت تمرین حفظ شده و کامنت فارسی نیز در جای خود باقی است. کد تمام تست‌های مورد انتظار را به درستی پاسخ می‌دهد، از جمله حالت‌های مرزی مانند لیست خالی یا لیست‌های خالی درون لیست اصلی."
+      },
+      "latency_ms": 1836.93,
+      "cached": true
+    },
+    {
+      "id": "code_with_persian_comments-0146",
+      "score": 0.3,
+      "passed": false,
+      "response": "```python\ndef unique_sorted(values: list[int]) -> list[int]:\n    \"\"\"تکرارها را حذف و نتیجه را به‌صورت صعودی مرتب برمی‌گرداند.\"\"\"\n    if not values:\n        return []\n    \n    unique = []\n    for num in values:\n        if num not in unique:\n            unique.append(num)\n    \n    for i in range(len(unique)):\n        for j in range(i + 1, len(unique)):\n            if unique[i] > unique[j]:\n                unique[i], unique[j] = unique[j], unique[i]\n    \n    return unique\n```",
+      "expected": "def unique_sorted(values: list[int]) -> list[int]:\n    return sorted(set(values))",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد امضای تابع را به درستی حفظ کرده و تست‌های مورد انتظار را پاسخ می‌دهد. با این حال، از توابع داخلی `set` و `sorted` که برای این کار استاندارد و بهینه هستند، استفاده نکرده و پیاده‌سازی مرتب‌سازی (Bubble Sort) بسیار ناکارآمدی ارائه داده است. این پیاده‌سازی برای ورودی‌های بزرگ عملکرد ضعیفی خواهد داشت. طبق قواند تمرین که استفاده از توابع داخلی ممنوعه، کد از نظر الگوریتمی درست است اما از نظر بهینه‌سازی ضعیف عمل می‌کند."
+      },
+      "latency_ms": 2755.21,
+      "cached": true
+    },
+    {
+      "id": "code_with_persian_comments-0162",
+      "score": 1.0,
+      "passed": true,
+      "response": "```python\ndef is_leap_year(year: int) -> bool:\n    \"\"\"بررسی می‌کند که آیا سال میلادی، سال کبیسه است یا نه.\"\"\"\n    if year % 4 != 0:\n        return False\n    elif year % 100 != 0:\n        return True\n    elif year % 400 != 0:\n        return False\n    else:\n        return True\n```",
+      "expected": "def is_leap_year(year: int) -> bool:\n    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد ارائه‌شده الگوریتم صحیح تشخیص سال کبیسه را پیاده‌سازی کرده است. منطق آن به‌طور کامل با قوانین سال کبیسه مطابقت دارد: اگر سال بر 4 بخش‌پذیر نباشد، غیرکبیسه است. اگر بود و بر 100 بخش‌پذیر نباشد، کبیسه است. اگر بر 100 بخش‌پذیر بود و بر 400 بخش‌پذیر نباشد، غیرکبیسه است و در غیر این صورت (یعنی اگر بر 400 هم بخش‌پذیر بود) کبیسه است. این منطق تمام تست‌های مورد انتظار را به درستی پاسخ می‌دهد. امضای تابع و کامنت‌های فارسی نیز به‌درستی حفظ شده‌اند."
+      },
+      "latency_ms": 49817.61,
+      "cached": true
+    },
+    {
+      "id": "code_with_persian_comments-0164",
+      "score": 1.0,
+      "passed": true,
+      "response": "```python\ndef is_leap_year(year: int) -> bool:\n    \"\"\"بررسی می‌کند که آیا سال میلادی، سال کبیسه است یا نه.\"\"\"\n    if year % 4 != 0:\n        return False\n    elif year % 100 != 0:\n        return True\n    elif year % 400 != 0:\n        return False\n    else:\n        return True\n```",
+      "expected": "def is_leap_year(year: int) -> bool:\n    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد ارائه‌شده الگوریتم صحیح تشخیص سال کبیسه را پیاده‌سازی کرده است. منطق آن به‌طور کامل با قوانین سال کبیسه مطابقت دارد: اگر سال بر ۴ بخش‌پذیر نباشد، غیرکبیسه است. اگر بر ۴ بخش‌پذیر باشد اما بر ۱۰۰ بخش‌پذیر نباشد، کبیسه است. اگر بر ۱۰۰ بخش‌پذیر باشد اما بر ۴۰۰ بخش‌پذیر نباشد، غیرکبیسه است و در غیر این صورت (یعنی اگر بر ۴۰۰ بخش‌پذیر باشد) کبیسه است. این منطق تمام حالت‌های مرزی را پوشش می‌دهد و تمام تست‌های مورد انتظار را به درستی پاس می‌دهد. امضای تابع و کامنت‌های فارسی نیز به‌درستی حفظ شده‌اند."
+      },
+      "latency_ms": 2377.85,
+      "cached": true
+    },
+    {
+      "id": "code_with_persian_comments-0165",
+      "score": 1.0,
+      "passed": true,
+      "response": "```python\ndef is_leap_year(year: int) -> bool:\n    \"\"\"بررسی می‌کند که آیا سال میلادی، سال کبیسه است یا نه.\"\"\"\n    if year % 4 != 0:\n        return False\n    elif year % 100 != 0:\n        return True\n    elif year % 400 != 0:\n        return False\n    else:\n        return True\n```",
+      "expected": "def is_leap_year(year: int) -> bool:\n    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد ارائه‌شده الگوریتم صحیح تشخیص سال کبیسه را پیاده‌سازی کرده است. منطق آن به‌طور کامل با قوانین سال کبیسه مطابقت دارد: اگر سال بر ۴ بخش‌پذیر نباشد، غیرکبیسه است. اگر بر ۴ بخش‌پذیر باشد اما بر ۱۰۰ بخش‌پذیر نباشد، کبیسه است. اگر بر ۱۰۰ بخش‌پذیر باشد اما بر ۴۰۰ بخش‌پذیر نباشد، غیرکبیسه است و در غیر این صورت (یعنی اگر بر ۴۰۰ بخش‌پذیر باشد) کبیسه است. این منطق تمام تست‌های مورد انتظار را به درستی پاس می‌دهد. امضای تابع و کامنت‌های فارسی نیز به‌درستی حفظ شده‌اند."
+      },
+      "latency_ms": 2407.31,
+      "cached": true
+    },
+    {
+      "id": "code_with_persian_comments-0167",
+      "score": 1.0,
+      "passed": true,
+      "response": "```python\ndef is_leap_year(year: int) -> bool:\n    \"\"\"بررسی می‌کند که آیا سال میلادی، سال کبیسه است یا نه.\"\"\"\n    if year % 4 != 0:\n        return False\n    elif year % 100 != 0:\n        return True\n    elif year % 400 != 0:\n        return False\n    else:\n        return True\n```",
+      "expected": "def is_leap_year(year: int) -> bool:\n    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد ارائه‌شده الگوریتم صحیح تشخیص سال کبیسه را پیاده‌سازی کرده است. منطق آن به‌طور کامل با قوانین سال کبیسه مطابقت دارد: اگر سال بر ۴ بخش‌پذیر نباشد، غیرکبیسه است. اگر بر ۴ بخش‌پذیر باشد اما بر ۱۰۰ بخش‌پذیر نباشد، کبیسه است. اگر بر ۱۰۰ بخش‌پذیر باشد اما بر ۴۰۰ بخش‌پذیر نباشد، غیرکبیسه است و در غیر این صورت (یعنی اگر بر ۴۰۰ بخش‌پذیر باشد) کبیسه است. این منطق تمام حالت‌های مرزی را پوشش می‌دهد و تمام تست‌های مورد انتظار را به درستی پاس می‌دهد. امضای تابع و کامنت‌ها نیز دقیقاً مطابق با صورت تمرین حفظ شده‌اند."
+      },
+      "latency_ms": 2386.29,
+      "cached": true
+    },
+    {
+      "id": "code_with_persian_comments-0168",
+      "score": 1.0,
+      "passed": true,
+      "response": "```python\ndef is_leap_year(year: int) -> bool:\n    \"\"\"بررسی می‌کند که آیا سال میلادی، سال کبیسه است یا نه.\"\"\"\n    if year % 4 != 0:\n        return False\n    elif year % 100 != 0:\n        return True\n    elif year % 400 != 0:\n        return False\n    else:\n        return True\n```",
+      "expected": "def is_leap_year(year: int) -> bool:\n    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد ارائه‌شده الگوریتم صحیح تشخیص سال کبیسه را پیاده‌سازی کرده است. منطق آن به‌طور کامل با قوانین سال کبیسه مطابقت دارد: اگر سال بر ۴ بخش‌پذیر نباشد، غیرکبیسه است. اگر بر ۴ بخش‌پذیر باشد اما بر ۱۰۰ بخش‌پذیر نباشد، کبیسه است. اگر بر ۱۰۰ بخش‌پذیر باشد اما بر ۴۰۰ بخش‌پذیر نباشد، غیرکبیسه است و در غیر این صورت (یعنی اگر بر ۴۰۰ بخش‌پذیر باشد) کبیسه است. این منطق تمام حالت‌های مرزی، از جمله سال‌های قرن (مانند ۱۹۰۰ و ۲۰۰۰) را به درستی مدیریت می‌کند. امضای تابع کاملاً حفظ شده و کد بدون استفاده از توابع ممنوعه نوشته شده است. کد تمام تست‌های مورد انتظار را با موفقیت پاس می‌دهد."
+      },
+      "latency_ms": 2683.28,
+      "cached": true
+    },
+    {
+      "id": "code_with_persian_comments-0176",
+      "score": 0.3,
+      "passed": false,
+      "response": "```python\ndef second_largest(values: list[int]) -> int | None:\n    \"\"\"دومین عدد بزرگِ متمایز لیست را برمی‌گرداند؛ اگر وجود نداشت None برمی‌گرداند.\"\"\"\n    if len(values) < 2:\n        return None\n    \n    largest = None\n    second_largest_val = None\n    \n    for num in values:\n        if largest is None:\n            largest = num\n        elif num > largest:\n            second_largest_val = largest\n            largest = num\n        elif num < largest:\n            if second_largest_val is None or num > second_largest_val:\n                second_largest_val = num\n    \n    return second_largest_val\n```",
+      "expected": "def second_largest(values: list[int]) -> int | None:\n    distinct = sorted(set(values), reverse=True)\n    if len(distinct) < 2:\n        return None\n    return distinct[1]",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد امضا و کامنت‌های فارسی را حفظ کرده و تست‌های مرزی مانند لیست‌های تک‌عضوی و لیست‌های هم‌مقدار را به درستی مدیریت می‌کند. با این حال، الگوریتم برای حالتی که بزرگترین عدد در لیست تکرار شود (مثلاً [1, 2, 2]) شکست می‌خورد و به اشتباه None برمی‌گرداند، در حالی که باید دومین عدد بزرگ متمایز (1) را برگرداند. این خطا باعث رد شدن تست‌های مشابه می‌شود."
+      },
+      "latency_ms": 1802.89,
+      "cached": true
+    },
+    {
+      "id": "code_with_persian_comments-0178",
+      "score": 0.3,
+      "passed": false,
+      "response": "```python\ndef second_largest(values: list[int]) -> int | None:\n    \"\"\"دومین عدد بزرگِ متمایز لیست را برمی‌گرداند؛ اگر وجود نداشت None برمی‌گرداند.\"\"\"\n    if len(values) < 2:\n        return None\n    \n    largest = None\n    second_largest_val = None\n    \n    for num in values:\n        if largest is None:\n            largest = num\n        elif num > largest:\n            second_largest_val = largest\n            largest = num\n        elif num < largest:\n            if second_largest_val is None or num > second_largest_val:\n                second_largest_val = num\n    \n    return second_largest_val\n```",
+      "expected": "def second_largest(values: list[int]) -> int | None:\n    distinct = sorted(set(values), reverse=True)\n    if len(distinct) < 2:\n        return None\n    return distinct[1]",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد امضای تابع را حفظ کرده و برای تست‌های ([5]) و ([7]) به درستی None برمی‌گرداند. با این حال، الگوریتم برای حالتی که تمام اعداد لیست یکسان هستند (مثل تست ([2, 2, 2])) اشتباه عمل می‌کند و به جای None، مقدار 2 را برمی‌گرداند. این نقص باعث رد شدن یک تست کلیدی شده و امتیاز کلی را به 0.3 کاهش می‌دهد."
+      },
+      "latency_ms": 8387.29,
+      "cached": false
+    },
+    {
+      "id": "code_with_persian_comments-0181",
+      "score": 0.3,
+      "passed": false,
+      "response": "```python\ndef second_largest(values: list[int]) -> int | None:\n    \"\"\"دومین عدد بزرگِ متمایز لیست را برمی‌گرداند؛ اگر وجود نداشت None برمی‌گرداند.\"\"\"\n    if len(values) < 2:\n        return None\n    \n    largest = None\n    second_largest_val = None\n    \n    for num in values:\n        if largest is None:\n            largest = num\n        elif num > largest:\n            second_largest_val = largest\n            largest = num\n        elif num < largest:\n            if second_largest_val is None or num > second_largest_val:\n                second_largest_val = num\n    \n    return second_largest_val\n```",
+      "expected": "def second_largest(values: list[int]) -> int | None:\n    distinct = sorted(set(values), reverse=True)\n    if len(distinct) < 2:\n        return None\n    return distinct[1]",
+      "scorer": "llm_judge",
+      "details": {
+        "rationale": "کد امضای تابع را حفظ کرده و برای تست‌های ([8]), ([3, 3, 3]) و ([7]) خروجی صحیح None برمی‌گرداند. با این حال، برای تست ([4, 4, -7, 4]) خروجی -7 را برمی‌گرداند در حالی که خروجی صحیح باید None باشد (چون تنها عدد متمایز 4 و -7 است و دومین عدد بزرگ وجود ندارد). همچنین برای تست ([1, 2, -2, 8]) خروجی 2 را برمی‌گرداند در حالی که خروجی صحیح باید 1 باشد (دومین عدد بزرگ متمایز). الگوریتم به درستی حالت‌های مرزی را مدیریت نمی‌کند."
+      },
+      "latency_ms": 2818.81,
+      "cached": false
+    }
+  ]
+}

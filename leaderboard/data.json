@@ -1,13 +1,14 @@
 {
-  "generated_at": "2026-11-25T14:52:16+00:00",
+  "generated_at": "2026-11-25T16:09:06+00:00",
   "rows": [
     {
       "model": "glm-4-plus",
       "org": "Z.ai",
       "license": "Proprietary (hosted API)",
-      "overall": 82.9,
+      "overall": 82.5,
       "tasks": {
         "bias_detection": 100.0,
+        "code_with_persian_comments": 80.0,
         "cultural_knowledge": 80.0,
         "rag_faithfulness": 100.0,
         "reading_comprehension": 90.0,
