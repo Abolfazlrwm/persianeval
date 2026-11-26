@@ -5,6 +5,7 @@ Examples:
     persianeval run --task reasoning --provider openai --model gpt-4o --rpm 60
     persianeval run --task spelling --provider ollama --model qwen2.5:7b-instruct
     persianeval leaderboard --results-dir results --out leaderboard
+    persianeval validate-results results
 """
 
 from __future__ import annotations
@@ -20,6 +21,7 @@ import typer
 from persianeval.harness.providers import ProviderError, create_provider
 from persianeval.harness.results import RunResult, save_json, save_parquet
 from persianeval.harness.runner import run_task
+from persianeval.harness.validation import collect_json_files, validate_file
 from persianeval.leaderboard.generate import generate_site
 from persianeval.tasks import get_task
 
@@ -157,6 +159,43 @@ def leaderboard(
     """Build the static leaderboard site from run results."""
     index_path = generate_site(results_dir, out, title=title)
     typer.echo(f"leaderboard written to {index_path}")
+
+
+@app.command("validate-results")
+def validate_results(
+    paths: Annotated[
+        list[Path], typer.Argument(help="Result JSON files and/or directories containing *.json files.")
+    ],
+) -> None:
+    """Validate run-result JSON files before submitting them to the leaderboard.
+
+    Errors (schema violations, metric drift, duplicate ids, unknown tasks,
+    broken timestamps) exit non-zero so CI can gate results PRs; warnings
+    (nondeterministic temperature, cached items, subset runs, missing
+    metadata) are informational only.
+    """
+    json_files = collect_json_files(paths)
+    if not json_files:
+        typer.secho("error: no *.json files found in the given paths", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=2)
+
+    total_errors = 0
+    for path in json_files:
+        errors, warnings = validate_file(path)
+        for message in errors:
+            typer.secho(f"FAIL {path}: {message}", fg=typer.colors.RED, err=True)
+        for message in warnings:
+            typer.secho(f"WARN {path}: {message}", fg=typer.colors.YELLOW)
+        if errors:
+            total_errors += len(errors)
+        else:
+            suffix = f" ({len(warnings)} warning(s))" if warnings else ""
+            typer.secho(f"OK   {path}{suffix}", fg=typer.colors.GREEN)
+
+    if total_errors:
+        typer.secho(f"{total_errors} error(s) in {len(json_files)} file(s)", fg=typer.colors.RED, err=True)
+        raise typer.Exit(code=1)
+    typer.echo(f"all {len(json_files)} file(s) valid")
 
 
 @app.callback()
