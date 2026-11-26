@@ -1,0 +1,45 @@
+name: Validate results
+
+# Results PRs add leaderboard entries produced on the contributor's own
+# hardware and API budget, which CI cannot re-run. This workflow runs
+# `persianeval validate-results` on every PR that touches results/, so
+# structural problems (metric drift, duplicate ids, unknown tasks, broken
+# timestamps) surface before a human reviewer opens the file.
+
+on:
+  pull_request:
+    paths:
+      - "results/**"
+      - ".github/workflows/validate_results.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-results-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: persianeval validate-results
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install package
+        run: python -m pip install -e .
+
+      - name: Reject committed parquet files
+        run: |
+          if [ -n "$(git ls-files 'results/*.parquet')" ]; then
+            echo "::error::results/*.parquet must not be committed — the audit trail is the JSON (see results/README.md)"
+            exit 1
+          fi
+
+      - name: Validate every committed result file
+        run: persianeval validate-results results

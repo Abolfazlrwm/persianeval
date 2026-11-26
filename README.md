@@ -98,6 +98,14 @@ are committed under [`results/`](results/). The open-source Ollama models (Qwen 
 Llama 3.1, Gemma 2, Aya Expanse) join the table once a weekly CPU run fits the runner
 budget again.
 
+### Adding a model to the leaderboard
+
+Two paths: a one-line addition to the weekly model matrix
+(`.github/workflows/leaderboard.yml`) for models reachable from CI runners, or
+a results PR from your own run — validated locally with
+`persianeval validate-results` before you submit. Full walkthrough:
+[`docs/submissions.md`](docs/submissions.md).
+
 ### Adding a task in 15 minutes
 
 Implement `AbstractTask`, ship a JSONL file with `{"id","prompt","expected","metadata"}`,
@@ -203,6 +211,14 @@ results  : results/reasoning__demo.parquet
 امتیاز منتشرشده قابل ممیزی است: فایل‌های نتیجهٔ تک‌تک آیتم‌ها در [`results/`](results/)
 کامیت شده‌اند. مدل‌های اپن‌سورس Ollama (Qwen 2.5، Llama 3.1، Gemma 2، Aya Expanse) وقتی
 بودجهٔ رانر CPU اجازهٔ اجرای هفتگی بدهد به جدول اضافه می‌شوند.
+
+### افزودن مدل به لیدربورد
+
+دو مسیر وجود دارد: افزودن یک خط به ماتریس مدل‌های هفتگی در
+`.github/workflows/leaderboard.yml` برای مدل‌هایی که از رانرهای CI در دسترس‌اند،
+یا ارسال PR نتایج از اجرای شخصی — که قبل از ارسال با
+`persianeval validate-results` اعتبارسنجی می‌شود. راهنمای کامل:
+[`docs/submissions.md`](docs/submissions.md).
 
 ### اضافه‌کردن تسک جدید در ۱۵ دقیقه
 

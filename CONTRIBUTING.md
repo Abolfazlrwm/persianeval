@@ -39,7 +39,9 @@ make ci          # ruff + mypy --strict + pytest (coverage >= 80%)
   sources; regenerate checksums.
 - **Harness/provider improvements** → please include an offline test (httpx
   `MockTransport` or `ScriptedProvider`) — no test, no merge.
-- **Leaderboard models** → one-line change in `.github/workflows/leaderboard.yml`.
+- **Leaderboard models** → follow `docs/submissions.md`: either a one-line
+  change in `.github/workflows/leaderboard.yml` (runners can reach the
+  model) or a results PR validated with `persianeval validate-results`.
 
 ### Review process
 
@@ -87,7 +89,9 @@ make ci          # ruff + mypy --strict + pytest (پوشش ۸۰٪ به بالا)
 - **افزودن نمونه به تسک موجود** → اسکریپت تولید را گسترش دهید (صحت با ساخت) یا نمونه‌های دستی با
   منبع در metadata اضافه کنید و checksumها را بازتولید کنید.
 - **بهبود هارنس/پروایدر** → حتماً تست آفلاین (`MockTransport` یا `ScriptedProvider`) همراه باشد.
-- **افزودن مدل به لیدربورد** → تغییر یک‌خطی در `.github/workflows/leaderboard.yml`.
+- **افزودن مدل به لیدربورد** → طبق `docs/submissions.md`: یا یک تغییر یک‌خطی در
+`.github/workflows/leaderboard.yml` (وقتی رانرها به مدل دسترسی دارند) یا یک PR نتایج
+که با `persianeval validate-results` اعتبارسنجی شده باشد.
 
 ### فرایند بازبینی
 
