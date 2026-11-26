@@ -41,7 +41,15 @@ jobs:
         run: mypy --strict src tests scripts
 
       - name: Test (pytest, coverage >= 80%)
-        run: pytest --cov=persianeval --cov-report=term-missing --cov-fail-under=80
+        run: pytest --cov=persianeval --cov-report=term-missing --cov-report=xml --cov-fail-under=80
+
+      - name: Upload coverage to Codecov
+        if: matrix.python == '3.13'
+        uses: codecov/codecov-action@v5
+        with:
+          files: coverage.xml
+          fail_ci_if_error: false
+          tokenless: true
 
       - name: Verify frozen datasets match checksums
         run: |

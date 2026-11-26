@@ -13,6 +13,7 @@
 [![License](https://img.shields.io/pypi/l/persianeval)](LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/Abolfazlrwm/persianeval?style=social)](https://github.com/Abolfazlrwm/persianeval/stargazers)
 [![PyPI downloads](https://img.shields.io/pypi/dm/persianeval)](https://pypi.org/project/persianeval/)
+[![Coverage](https://codecov.io/gh/Abolfazlrwm/persianeval/graph/badge.svg)](https://codecov.io/gh/Abolfazlrwm/persianeval)
 
 [English](#english) · [فارسی](#فارسی) · [Leaderboard](https://Abolfazlrwm.github.io/persianeval/)
 
