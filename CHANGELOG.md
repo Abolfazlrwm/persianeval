@@ -4,6 +4,36 @@ All notable changes to PersianEval are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2026-11-25
+
+### Added
+
+- `persianeval validate-results`: offline structural checks for submitted
+  run-result JSON files — schema conformance and version, registered task
+  names, `n_items` vs listed items, duplicate ids, scores within [0, 1],
+  `accuracy`/`mean_score` recomputed from the per-item data (4-decimal
+  rounding tolerance), ISO-8601 timestamps and their ordering, empty
+  model/provider. Errors fail CI; warnings (nonzero temperature, cache
+  hits, subset runs, empty org/license metadata) never do. 33 new tests,
+  including one that validates every committed result file on each CI run.
+- Results-PR gate: PRs touching `results/` run the validator through a
+  dedicated workflow that also rejects committed parquet files.
+- `docs/submissions.md`: both entry paths to the leaderboard — the weekly
+  model-matrix edit and validated results PRs — documented in English and
+  Persian, with the ADR 0003 protocol spelled out.
+- Dependabot (pip + GitHub Actions, weekly, dev deps grouped) and
+  pre-commit hooks mirroring the ruff gates.
+- Coverage uploads to Codecov from the Python 3.13 job; badge in README.
+
+### Changed
+
+- The week-48 leaderboard run is now complete: `code_with_persian_comments`
+  landed at accuracy 80 (20 items, seed 202648) and GLM-4-Plus's overall
+  moved 82.9 -> 82.5 across all eight tasks. The 0.2.0 note about that
+  task staying pending no longer applies.
+- README and CONTRIBUTING route leaderboard-model submissions through
+  `docs/submissions.md`.
+
 ## [0.2.0] - 2026-11-25
 
 ### Added
@@ -82,6 +112,7 @@ Initial public release.
 - **Docs**: bilingual README/methodology/CONTRIBUTING, task-authoring guide,
   three ADRs, CITATION.cff, Code of Conduct.
 
+[0.2.1]: https://github.com/Abolfazlrwm/persianeval/releases/tag/v0.2.1
 [0.2.0]: https://github.com/Abolfazlrwm/persianeval/releases/tag/v0.2.0
 [0.1.2]: https://github.com/Abolfazlrwm/persianeval/releases/tag/v0.1.2
 [0.1.1]: https://github.com/Abolfazlrwm/persianeval/releases/tag/v0.1.1

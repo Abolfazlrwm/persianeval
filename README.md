@@ -130,7 +130,7 @@ PersianEval, please cite (see [`CITATION.cff`](CITATION.cff)):
   author = {PersianEval Contributors},
   year   = {2026},
   url    = {https://github.com/Abolfazlrwm/persianeval},
-  version= {v0.2.0}
+  version= {v0.2.1}
 }
 ```
 
